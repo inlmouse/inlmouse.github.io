@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"inlmouse.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Some discussion of Cross Entropy Loss and its equivalence between MLE.(in Chinese)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="From Cross Entropy to Metric Learning: A Brief Introduction and Some Discussion">
+<meta property="og:url" content="http://inlmouse.github.io/CEMLE/index.html">
+<meta property="og:site_name" content="Strategic Research Office of Individual Eleven">
+<meta property="og:description" content="Some discussion of Cross Entropy Loss and its equivalence between MLE.(in Chinese)">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-12-01T04:13:00.000Z">
+<meta property="article:modified_time" content="2022-12-06T03:55:02.412Z">
+<meta property="article:author" content="Patrick Sylvestre">
+<meta property="article:tag" content="Math">
+<meta property="article:tag" content="Information Theory">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://inlmouse.github.io/CEMLE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://inlmouse.github.io/CEMLE/","path":"CEMLE/","title":"From Cross Entropy to Metric Learning: A Brief Introduction and Some Discussion"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>From Cross Entropy to Metric Learning: A Brief Introduction and Some Discussion | Strategic Research Office of Individual Eleven</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Strategic Research Office of Individual Eleven</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Frontier Explorer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Articles</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About Me</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E7%86%B5"><span class="nav-number">1.</span> <span class="nav-text">信息熵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%AF%B9%E7%86%B5-KL-Divergence"><span class="nav-number">2.</span> <span class="nav-text">相对熵:KL Divergence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E5%8F%89%E7%86%B5-Cross-Entropy"><span class="nav-number">3.</span> <span class="nav-text">交叉熵:Cross Entropy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E5%8F%89%E7%86%B5%E7%9A%84MLE-%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1-%E8%A7%A3%E9%87%8A"><span class="nav-number">4.</span> <span class="nav-text">交叉熵的MLE(最大似然估计)解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Patrick Sylvestre"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Patrick Sylvestre</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">articles</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/inlmouse" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;inlmouse" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:accelouch@gmail.com" title="E-Mail → mailto:accelouch@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://inlmouse.github.io/CEMLE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Patrick Sylvestre">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Strategic Research Office of Individual Eleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="From Cross Entropy to Metric Learning: A Brief Introduction and Some Discussion | Strategic Research Office of Individual Eleven">
+      <meta itemprop="description" content="Some discussion of Cross Entropy Loss and its equivalence between MLE.(in Chinese)">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          From Cross Entropy to Metric Learning: A Brief Introduction and Some Discussion
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-12-01 12:13:00" itemprop="dateCreated datePublished" datetime="2022-12-01T12:13:00+08:00">2022-12-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-12-06 11:55:02" itemprop="dateModified" datetime="2022-12-06T11:55:02+08:00">2022-12-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">Some discussion of Cross Entropy Loss and its equivalence between MLE.(in Chinese)</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h2><p>信息熵是定义信息量的一种测度，如同热力学中定义一样[1]：熵越大混乱程度越大，信息熵越大信息量越大。因此信息熵在直观上需要满足以下两点要求：</p>
+<ul>
+<li>越不可能($p(x)$越小)发生的事件($x$)信息量越大，确定事件($p(x)$很大)的信息量很小；</li>
+<li>独立事件的信息量可叠加；</li>
+</ul>
+<p>满足以上要求的测度定义方式并不唯一，但是数学严谨化之后满足性质的熵几乎是唯一的<sup><a href="#fn_1" id="reffn_1">1</a></sup>。于是有如下定理：</p>
+<p><strong>Theorem 1</strong>(离散信息熵表述唯一性定理[2]). <em>任何具有上述性质的离散的熵，其函数形式必为（Shannon熵 或von Neumann熵）和（Shannon熵 或Hartley 熵）的线性组合。</em></p>
+<p>因此在此定义：<br><strong>Definition 1</strong> (Shannon熵). <em>若$p(x_i)$表随机事件$X$观测为$x_i$的概率，则Shannon熵：<br>\begin{equation}<br>H(X) = -\sum_{i=1}^np(x_i)\log_ap(x_i).<br>\end{equation}<br>这里如果$a=e$则$H(X)$的单位为奈培(NP)，如果$a=2$则$H(X)$的单位为比特(bit)，实际的不同只会让相差一个常系数，并不影响其实际意义。</em></p>
+<blockquote id="fn_1">
+<sup>1</sup>. 在数学上需要严格满足以下三点：1. 不变性：相空间的熵在保测度正则变换下不变，量子熵在unitary变换下不变；2. 可加性或者泛可加性(subadditive)；3. 连续延拓后需要是凸函数；<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<h2 id="相对熵-KL-Divergence"><a href="#相对熵-KL-Divergence" class="headerlink" title="相对熵:KL Divergence"></a>相对熵:KL Divergence</h2><p>相对熵又称KL散度(Kullback-Leibler Divergence)，是衡量两个事件或者分布之间相似度的度量。当然这个度量也不唯一，但是那是另外一个话题。</p>
+<p><strong>Definition 2</strong> (KL散度). <em>对于随机事件$X$和$Y$，其概率分布分别为$p(x),q(x)$，则KL散度：<br>\begin{equation}\label{equ:KL}<br>D_{KL}(X||Y) = \sum_{i=1}^np(x_i)\log_a\dfrac{p(x_i)}{q(x_i)}. \tag{1}<br>\end{equation}</em></p>
+<p>值得注意的是\ref{equ:KL}式不满足对称性($D_{KL}(X||Y) \neq D_{KL}(Y||X)$)和三角不等式，这一点在JS散度中得到了改善。</p>
+<h2 id="交叉熵-Cross-Entropy"><a href="#交叉熵-Cross-Entropy" class="headerlink" title="交叉熵:Cross Entropy"></a>交叉熵:Cross Entropy</h2><p>考查\ref{equ:KL}式：<br>\begin{equation}<br>D_{KL}(X||Y) = -H(X)-\sum_{i=1}^np(x_i)\log_aq(x_i).<br>\end{equation}<br>注意到在实际使用中往往用$p(x)$来表示样本的真实分布，那么$H(X)$的值往往是不变的，因而直接考察后一项即可。</p>
+<p><strong>Definition 3</strong> (交叉熵). <em>对于随机事件$X$和$Y$，其概率分布分别为$p(x),q(x)$，则交叉熵：<br>\begin{equation}<br>H(X,Y) = -\sum_{i=1}^np(x_i)\log_aq(x_i).<br>\end{equation}</em></p>
+<h2 id="交叉熵的MLE-最大似然估计-解释"><a href="#交叉熵的MLE-最大似然估计-解释" class="headerlink" title="交叉熵的MLE(最大似然估计)解释"></a>交叉熵的MLE(最大似然估计)解释</h2><p>现在有一个真实分布为$p(x)$的随机变量$X$，我们对它进行了$N$次独立同分布实验，对于每个可能的结果$x_i(i=1,\cdots,n)$观察到的次数为$N(x_i)$，显然$\sum_{i=1}^nN(x_i)=N$，那么它的似然值就可以写成：<br>\begin{equation}<br>L=\prod_{i=1}^np(x_i)^N(x_i).<br>\end{equation}</p>
+<p>考察其对数似然值：<br>\begin{equation}\label{equ:lnl}<br>\ln L=\sum_{i=1}^nN(x_i)\ln p(x_i).\tag{2}<br>\end{equation}</p>
+<p>\ref{equ:lnl}式有两个缺点，其一它是个负数，其二它的数值跟样本数有关，样本越多数值越小。因此除以总的样本数归一化，再取相反数，然后改用频率表示：<br>\begin{equation}<br>-\frac{\ln L}{N}=-\sum_{i=1}^n\frac{N(x_i)}{N}\ln p(x_i) = -\sum_{i=1}^n q(x_i)\ln p(x_i) =H(Y,X),<br>\end{equation}<br>显然$\frac{N(x_i)}{N}$即是观测到的概率$q(x_i)$。</p>
+<p>下面在给定$q(x)$的情况下考察$-\dfrac{\ln L}{N}$的最小值时$p(x)$的取值，考虑拉格朗日乘子法，考察拉式量：<br>\begin{equation}<br>W=-\sum_{i=1}^n q(x_i)\ln p(x_i) + \lambda(\sum_{i=1}^np(x_i)-1).<br>\end{equation}<br>求偏导可得：</p>
+<p>\begin{equation}<br>-\frac{q(x)}{p(x)}+\lambda=0,<br>\end{equation}<br>即是$\forall i, p(x_i),q(x_i)$成比例，再由概率归一化条件知：<br>\begin{equation}<br>p(x)=q(x).<br>\end{equation}</p>
+<center><strong>因此可以看出，交叉熵最小实质上就是似然值最大。</strong></center>
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[1]: Witten, E. . “A Mini-Introduction To Information Theory.”, 10.1007/s40766-020-00004-5. 2018.<br>[2]: Aczel, Janos. et al. “Why the Shannon and Hartley entropies are ‘natural’”, 131—146/Advances in applied probability. 1974.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Math/" rel="tag"># Math</a>
+              <a href="/tags/Information-Theory/" rel="tag"># Information Theory</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/deepmournjzm/" rel="prev" title="沉痛悼念江泽民同志">
+                  <i class="fa fa-chevron-left"></i> 沉痛悼念江泽民同志
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/SparseRepresentation/" rel="next" title="Sparse Representation of the Signal: A Brief Introduction and Some Discussion">
+                  Sparse Representation of the Signal: A Brief Introduction and Some Discussion <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Patrick Sylvestre</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","mhchem":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"inlmouse/inlmouse.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>
