@@ -27,7 +27,7 @@
 <meta property="og:description" content="Some discussion of Cross Entropy Loss and its equivalence between MLE.(in Chinese)">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-12-01T04:13:00.000Z">
-<meta property="article:modified_time" content="2022-12-06T03:55:02.412Z">
+<meta property="article:modified_time" content="2022-12-12T14:32:47.836Z">
 <meta property="article:author" content="Patrick Sylvestre">
 <meta property="article:tag" content="Math">
 <meta property="article:tag" content="Information Theory">
@@ -86,7 +86,8 @@ p.spoiler {
   color: black;
   background-color: black;
   text-shadow: none;
-}</style></head>
+}</style><link rel="alternate" href="/atom.xml" title="Strategic Research Office of Individual Eleven" type="application/atom+xml">
+</head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -161,28 +162,28 @@ p.spoiler {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">articles</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
   <div class="links-of-author animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/inlmouse" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;inlmouse" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/inlmouse" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;inlmouse" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:accelouch@gmail.com" title="E-Mail → mailto:accelouch@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:accelouch@gmail.com" title="E-Mail → mailto:accelouch@gmail.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -243,7 +244,7 @@ p.spoiler {
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-12-06 11:55:02" itemprop="dateModified" datetime="2022-12-06T11:55:02+08:00">2022-12-06</time>
+      <time title="Modified: 2022-12-12 22:32:47" itemprop="dateModified" datetime="2022-12-12T22:32:47+08:00">2022-12-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -289,7 +290,7 @@ p.spoiler {
 <p>值得注意的是\ref{equ:KL}式不满足对称性($D_{KL}(X||Y) \neq D_{KL}(Y||X)$)和三角不等式，这一点在JS散度中得到了改善。</p>
 <h2 id="交叉熵-Cross-Entropy"><a href="#交叉熵-Cross-Entropy" class="headerlink" title="交叉熵:Cross Entropy"></a>交叉熵:Cross Entropy</h2><p>考查\ref{equ:KL}式：<br>\begin{equation}<br>D_{KL}(X||Y) = -H(X)-\sum_{i=1}^np(x_i)\log_aq(x_i).<br>\end{equation}<br>注意到在实际使用中往往用$p(x)$来表示样本的真实分布，那么$H(X)$的值往往是不变的，因而直接考察后一项即可。</p>
 <p><strong>Definition 3</strong> (交叉熵). <em>对于随机事件$X$和$Y$，其概率分布分别为$p(x),q(x)$，则交叉熵：<br>\begin{equation}<br>H(X,Y) = -\sum_{i=1}^np(x_i)\log_aq(x_i).<br>\end{equation}</em></p>
-<h2 id="交叉熵的MLE-最大似然估计-解释"><a href="#交叉熵的MLE-最大似然估计-解释" class="headerlink" title="交叉熵的MLE(最大似然估计)解释"></a>交叉熵的MLE(最大似然估计)解释</h2><p>现在有一个真实分布为$p(x)$的随机变量$X$，我们对它进行了$N$次独立同分布实验，对于每个可能的结果$x_i(i=1,\cdots,n)$观察到的次数为$N(x_i)$，显然$\sum_{i=1}^nN(x_i)=N$，那么它的似然值就可以写成：<br>\begin{equation}<br>L=\prod_{i=1}^np(x_i)^N(x_i).<br>\end{equation}</p>
+<h2 id="交叉熵的MLE-最大似然估计-解释"><a href="#交叉熵的MLE-最大似然估计-解释" class="headerlink" title="交叉熵的MLE(最大似然估计)解释"></a>交叉熵的MLE(最大似然估计)解释</h2><p>现在有一个真实分布为$p(x)$的随机变量$X$，我们对它进行了$N$次独立同分布实验，对于每个可能的结果$x_i(i=1,\cdots,n)$观察到的次数为$N(x_i)$，显然$\sum_{i=1}^nN(x_i)=N$，那么它的似然值就可以写成：<br>\begin{equation}<br>L=\prod_{i=1}^np(x_i)^{N(x_i)}.<br>\end{equation}</p>
 <p>考察其对数似然值：<br>\begin{equation}\label{equ:lnl}<br>\ln L=\sum_{i=1}^nN(x_i)\ln p(x_i).\tag{2}<br>\end{equation}</p>
 <p>\ref{equ:lnl}式有两个缺点，其一它是个负数，其二它的数值跟样本数有关，样本越多数值越小。因此除以总的样本数归一化，再取相反数，然后改用频率表示：<br>\begin{equation}<br>-\frac{\ln L}{N}=-\sum_{i=1}^n\frac{N(x_i)}{N}\ln p(x_i) = -\sum_{i=1}^n q(x_i)\ln p(x_i) =H(Y,X),<br>\end{equation}<br>显然$\frac{N(x_i)}{N}$即是观测到的概率$q(x_i)$。</p>
 <p>下面在给定$q(x)$的情况下考察$-\dfrac{\ln L}{N}$的最小值时$p(x)$的取值，考虑拉格朗日乘子法，考察拉式量：<br>\begin{equation}<br>W=-\sum_{i=1}^n q(x_i)\ln p(x_i) + \lambda(\sum_{i=1}^np(x_i)-1).<br>\end{equation}<br>求偏导可得：</p>
@@ -317,7 +318,7 @@ p.spoiler {
       <a href="http://inlmouse.github.io/CEMLE/" title="From Cross Entropy to Metric Learning: A Brief Introduction and Some Discussion">http://inlmouse.github.io/CEMLE/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
   </li>
 </ul>
 </div>
@@ -384,7 +385,7 @@ p.spoiler {
       </span>
     </span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Gemini</a>
   </div>
 
     </div>
