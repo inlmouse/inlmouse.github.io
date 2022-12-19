@@ -6,7 +6,7 @@
   <link href="http://inlmouse.github.io/atom.xml" rel="self"/>
   
   <link href="http://inlmouse.github.io/"/>
-  <updated>2022-12-19T14:23:16.664Z</updated>
+  <updated>2022-12-19T14:33:39.145Z</updated>
   <id>http://inlmouse.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://inlmouse.github.io/UESTCGEE/"/>
     <id>http://inlmouse.github.io/UESTCGEE/</id>
     <published>2022-12-12T15:20:03.000Z</published>
-    <updated>2022-12-19T14:23:16.664Z</updated>
+    <updated>2022-12-19T14:33:39.145Z</updated>
     
     <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>本文收录了适用于电子科技大学(UESTC)数学系研究生入学考试模拟试题（数学分析与高等代数），提供LaTeX源文件下载。题源自2020年以前真题，裴砖，丘砖，谢惠民，其他985高校真题及其改编。不可用做商业用途。</p><h2 id="数学分析601"><a href="#数学分析601" class="headerlink" title="数学分析601"></a>数学分析601</h2><p>共计11套模拟题：<a href="https://www.overleaf.com/read/smpfwcgtxxjj">LaTeX源文件链接</a>。</p><p>样题如下：</p><object data="./UESTCMA8.pdf" type="application/pdf" width="100%" height="100%"><iframe src="./UESTCMA8.pdf" width="100%" height="100%" style="border: none;">This browser does not support PDFs. Please download the PDF to view it: <a href="./UESTCMA8.pdf">Download PDF</a></iframe></object><h2 id="高等代数835"><a href="#高等代数835" class="headerlink" title="高等代数835"></a>高等代数835</h2><p>共计8套模拟题：<a href="https://www.overleaf.com/read/gbwddkmkkkjb">LaTeX源文件链接</a>。</p><p>样题如下：</p><object data="./UESTCAA8.pdf" type="application/pdf" width="100%" height="100%"><iframe src="./UESTCAA8.pdf" width="100%" height="100%" style="border: none;">This browser does not support PDFs. Please download the PDF to view it: <a href="./UESTCAA8.pdf">Download PDF</a></iframe></object>]]></content>
     
@@ -36,6 +36,8 @@
     <category term="Mathematical Analysis" scheme="http://inlmouse.github.io/tags/Mathematical-Analysis/"/>
     
     <category term="GEE" scheme="http://inlmouse.github.io/tags/GEE/"/>
+    
+    <category term="Advanced Algebra" scheme="http://inlmouse.github.io/tags/Advanced-Algebra/"/>
     
   </entry>
   
