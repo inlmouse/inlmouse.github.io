@@ -6,7 +6,7 @@
   <link href="http://inlmouse.github.io/atom.xml" rel="self"/>
   
   <link href="http://inlmouse.github.io/"/>
-  <updated>2022-12-19T14:33:39.145Z</updated>
+  <updated>2023-02-13T07:01:24.018Z</updated>
   <id>http://inlmouse.github.io/</id>
   
   <author>
@@ -17,13 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>电子科技大学(UESTC)数学系研究生入学考试数模拟试题</title>
+    <title>Fisher Information and Its Application</title>
+    <link href="http://inlmouse.github.io/fisherinfo/"/>
+    <id>http://inlmouse.github.io/fisherinfo/</id>
+    <published>2023-02-13T06:23:38.000Z</published>
+    <updated>2023-02-13T07:01:24.018Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文主要介绍Fisher信息(矩阵)的定义、性质以及其计算与一些简单应用。</p><div class="pdf-container" data-target="./Fisher_Information_and_Its_Application.pdf" data-height="800px"></div>]]></content>
+    
+    
+    <summary type="html">This post mainly introduces the definition, properties, calculation and application of Fisher Information(Matrix).(in Chinese)</summary>
+    
+    
+    
+    <category term="Machine Learning" scheme="http://inlmouse.github.io/categories/Machine-Learning/"/>
+    
+    
+    <category term="Math" scheme="http://inlmouse.github.io/tags/Math/"/>
+    
+    <category term="Information Theory" scheme="http://inlmouse.github.io/tags/Information-Theory/"/>
+    
+    <category term="Statistic" scheme="http://inlmouse.github.io/tags/Statistic/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>电子科技大学(UESTC)数学系研究生入学考试模拟试题</title>
     <link href="http://inlmouse.github.io/UESTCGEE/"/>
     <id>http://inlmouse.github.io/UESTCGEE/</id>
     <published>2022-12-12T15:20:03.000Z</published>
-    <updated>2022-12-19T14:33:39.145Z</updated>
+    <updated>2023-02-13T06:58:41.149Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>本文收录了适用于电子科技大学(UESTC)数学系研究生入学考试模拟试题（数学分析与高等代数），提供LaTeX源文件下载。题源自2020年以前真题，裴砖，丘砖，谢惠民，其他985高校真题及其改编。不可用做商业用途。</p><h2 id="数学分析601"><a href="#数学分析601" class="headerlink" title="数学分析601"></a>数学分析601</h2><p>共计11套模拟题：<a href="https://www.overleaf.com/read/smpfwcgtxxjj">LaTeX源文件链接</a>。</p><p>样题如下：</p><object data="./UESTCMA8.pdf" type="application/pdf" width="100%" height="100%"><iframe src="./UESTCMA8.pdf" width="100%" height="100%" style="border: none;">This browser does not support PDFs. Please download the PDF to view it: <a href="./UESTCMA8.pdf">Download PDF</a></iframe></object><h2 id="高等代数835"><a href="#高等代数835" class="headerlink" title="高等代数835"></a>高等代数835</h2><p>共计8套模拟题：<a href="https://www.overleaf.com/read/gbwddkmkkkjb">LaTeX源文件链接</a>。</p><p>样题如下：</p><object data="./UESTCAA8.pdf" type="application/pdf" width="100%" height="100%"><iframe src="./UESTCAA8.pdf" width="100%" height="100%" style="border: none;">This browser does not support PDFs. Please download the PDF to view it: <a href="./UESTCAA8.pdf">Download PDF</a></iframe></object>]]></content>
+    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>本文收录了适用于电子科技大学(UESTC)数学系研究生入学考试模拟试题（数学分析与高等代数），提供LaTeX源文件下载。题源自2020年以前真题，裴砖，丘砖，谢惠民，其他985高校真题及其改编。不可用做商业用途。</p><h2 id="数学分析601"><a href="#数学分析601" class="headerlink" title="数学分析601"></a>数学分析601</h2><p>共计11套模拟题：<a href="https://www.overleaf.com/read/smpfwcgtxxjj">LaTeX源文件链接</a>。</p><p>样题如下：<br><div class="pdf-container" data-target="./UESTCMA8.pdf" data-height="800px"></div></p><h2 id="高等代数835"><a href="#高等代数835" class="headerlink" title="高等代数835"></a>高等代数835</h2><p>共计8套模拟题：<a href="https://www.overleaf.com/read/gbwddkmkkkjb">LaTeX源文件链接</a>。</p><p>样题如下：<br><div class="pdf-container" data-target="./UESTCAA8.pdf" data-height="800px"></div></p>]]></content>
     
     
     <summary type="html">The simulation questions for the National Graduate Entrance Examination applicable to the Department of Mathematics, UESTC(in Chinese)</summary>
