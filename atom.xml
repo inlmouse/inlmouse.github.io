@@ -6,7 +6,7 @@
   <link href="http://inlmouse.github.io/atom.xml" rel="self"/>
   
   <link href="http://inlmouse.github.io/"/>
-  <updated>2023-03-30T09:03:57.283Z</updated>
+  <updated>2023-04-16T04:35:40.513Z</updated>
   <id>http://inlmouse.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Stable Diffusion LoRA Model, A First Try</title>
+    <link href="http://inlmouse.github.io/sdchunmomo/"/>
+    <id>http://inlmouse.github.io/sdchunmomo/</id>
+    <published>2023-04-16T02:00:00.000Z</published>
+    <updated>2023-04-16T04:35:40.513Z</updated>
+    
+    <content type="html"><![CDATA[<p>After the craziest March in the recent history of AI development, everyone has witnessed the powerful capabilities of generative AI. In the field of computer vision, there have been countless AIGC (AI-generated content) methods and tools, such as GigaGAN, Stable Diffusion, DALL·E2, MidJourney, LoRA, and many more, whose results are stunning and awe-inspiring.</p><p>I had planned to write a technical report, sort-out and studying <strong>generative models from the perspective of probability theory</strong>. With a rigorous attitude, I intended to first experiment with the capabilities of these new technologies before writing this note. However, things spiraled out of control, and even though I had already played around with things like StyleTransfer 8 years ago, I still found them extremely fascinating.</p><p>I spent some time training a Stable Diffusion RoLA model(<a href="https://civitai.com/models/41309/chunmomo">civitai link</a>), this post will demonstrate some technical details.</p><img src="/sdchunmomo/00074-383632874.png" class width="512" height="768"> <center> The generated image sample, which have an extremely high level of completion to the human eyes.</center><h2 id="LoRA-Low-rank-Adaptation-for-Fast-Text-to-Image-Diffusion-Fine-tuning"><a href="#LoRA-Low-rank-Adaptation-for-Fast-Text-to-Image-Diffusion-Fine-tuning" class="headerlink" title="LoRA: Low-rank Adaptation for Fast Text-to-Image Diffusion Fine-tuning"></a>LoRA: Low-rank Adaptation for Fast Text-to-Image Diffusion Fine-tuning</h2><p>Many people like to fine-tune stable diffusion models to fit their needs and generate higher fidelity images. However, the fine-tuning process is very slow, and finding a good balance between the number of steps and the quality of the results is not easy. Furthermore, the final output of a fully fine-tuned model is very large. Some people use textual inversion as an alternative method, but clearly this is not optimal: textual inversion only creates a small word embedding, resulting in a final image that is not as good as that produced by a fully fine-tuned model.</p><p>As the results, LoRA came out. <a href="https://arxiv.org/abs/2106.09685">LoRA</a> stands for Low-Rank Adaptation, a mathematical technique to deal with the problem of fine-tuning LLMs and reduce the number of parameters that are trained. The idea is very simple. Just like ResNet, training residuals instead of the model itself, which is indeed the work of Microsoft Research. By applying LoRA to cross-attention layers, It links image representations with prompts describing them. </p><img src="/sdchunmomo/latent-diffusion.png" class width="800" height="397"> <center> Latent Diffusion Models(https://arxiv.org/abs/2112.10752), which is used to fine-turn high resolution images in stable diffusion. The yellow blocks are cross-attention layers.</center><h2 id="The-Self-trained-Model-Some-Details"><a href="#The-Self-trained-Model-Some-Details" class="headerlink" title="The Self-trained Model: Some Details"></a>The Self-trained Model: Some Details</h2><p>This LoRA model is trained by a non-NSFW subset of the photobook of the famous cosplayer Chunmomo(蠢沫沫). <strong>So it won’t work well with NSFW prompts</strong>.</p><p>I manually selected 96 face images and 259 bust/full body images, as shown in the figure below. The selection of face concept set is to use images with no occlusion and a single background as much as possible.<br><img src="/sdchunmomo/face.png" class width="880" height="408"> </p><center> Face concept set.</center><img src="/sdchunmomo/body.png" class width="880" height="408"> <center> Body concept set.</center><p>The training process has gone through 50 epochs, and each concept have trained 10 times. Image resolution 512x768, batch size 1(RTX 2080 8GB). </p><img src="/sdchunmomo/loss.png" class width="1038" height="336"> <p>After 19.5 hours of waiting, I finally got the LoRA model. </p><h2 id="Some-Generated-Image-Results"><a href="#Some-Generated-Image-Results" class="headerlink" title="Some Generated Image Results"></a>Some Generated Image Results</h2><img src="/sdchunmomo/00071-3836818767.png" class width="512" height="768"> <center> Key Prompts: white_dress, sailor_collar, sailor_dress, polka_dot, straw_hat, v_arm</center><img src="/sdchunmomo/00062-6173687.png" class width="512" height="768"> <center> Key Prompts: goggles, goggles_on_head, shorts, socks, long_sleeves, street, outdoor</center><img src="/sdchunmomo/00067-1673675340.png" class width="512" height="768"> <center> Key Prompts: goggles, goggles_on_head, shorts, socks, short_sleeves, ocean, water, twin_braids</center><img src="/sdchunmomo/00043-281637387.png" class width="512" height="768"> <center> Key Prompts: sailor_collar, sailor_dress, pleated_skirt, ponytail, cross_arm, sitting</center><h2 id="Important-Statement"><a href="#Important-Statement" class="headerlink" title="Important Statement"></a>Important Statement</h2><p><strong>This model is for academic research use only, commercial use is strictly prohibited. Use of this model to generate NSFW content, as well as any use that compromises individual rights and privacy is prohibited.</strong></p>]]></content>
+    
+    
+    <summary type="html">Technical details of a self-trained LoRA model. 一个自己训练的LoRA模型的技术细节。(in English)</summary>
+    
+    
+    
+    <category term="AIGC" scheme="http://inlmouse.github.io/categories/AIGC/"/>
+    
+    
+    <category term="Stable Diffusion" scheme="http://inlmouse.github.io/tags/Stable-Diffusion/"/>
+    
+    <category term="LoRA" scheme="http://inlmouse.github.io/tags/LoRA/"/>
+    
+  </entry>
   
   <entry>
     <title>第十三届全国大学生数学竞赛决赛(数学类高年级组)第九题赏析</title>

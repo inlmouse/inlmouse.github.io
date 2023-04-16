@@ -19,30 +19,39 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"inlmouse.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="The Solution of the Final Round of the 13th National College Student Mathematics Competition (Mathematics Category, Senior Group) Q9.(in Chinese)">
+    <meta name="description" content="Technical details of a self-trained LoRA model. 一个自己训练的LoRA模型的技术细节。(in English)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第十三届全国大学生数学竞赛决赛(数学类高年级组)第九题赏析">
-<meta property="og:url" content="http://inlmouse.github.io/13thNUMCFQ9/index.html">
+<meta property="og:title" content="Stable Diffusion LoRA Model, A First Try">
+<meta property="og:url" content="http://inlmouse.github.io/sdchunmomo/index.html">
 <meta property="og:site_name" content="Strategic Research Office of Individual Eleven">
-<meta property="og:description" content="The Solution of the Final Round of the 13th National College Student Mathematics Competition (Mathematics Category, Senior Group) Q9.(in Chinese)">
+<meta property="og:description" content="Technical details of a self-trained LoRA model. 一个自己训练的LoRA模型的技术细节。(in English)">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-03-30T00:38:09.000Z">
-<meta property="article:modified_time" content="2023-03-30T09:03:57.283Z">
+<meta property="og:image" content="http://inlmouse.github.io/sdchunmomo/00074-383632874.png">
+<meta property="og:image" content="http://inlmouse.github.io/sdchunmomo/latent-diffusion.png">
+<meta property="og:image" content="http://inlmouse.github.io/sdchunmomo/face.png">
+<meta property="og:image" content="http://inlmouse.github.io/sdchunmomo/body.png">
+<meta property="og:image" content="http://inlmouse.github.io/sdchunmomo/loss.png">
+<meta property="og:image" content="http://inlmouse.github.io/sdchunmomo/00071-3836818767.png">
+<meta property="og:image" content="http://inlmouse.github.io/sdchunmomo/00062-6173687.png">
+<meta property="og:image" content="http://inlmouse.github.io/sdchunmomo/00067-1673675340.png">
+<meta property="og:image" content="http://inlmouse.github.io/sdchunmomo/00043-281637387.png">
+<meta property="article:published_time" content="2023-04-16T02:00:00.000Z">
+<meta property="article:modified_time" content="2023-04-16T04:35:40.513Z">
 <meta property="article:author" content="Patrick Sylvestre">
-<meta property="article:tag" content="Math">
-<meta property="article:tag" content="Matrix Analysis">
-<meta property="article:tag" content="Probability Theory">
+<meta property="article:tag" content="Stable Diffusion">
+<meta property="article:tag" content="LoRA">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://inlmouse.github.io/sdchunmomo/00074-383632874.png">
 
 
-<link rel="canonical" href="http://inlmouse.github.io/13thNUMCFQ9/">
+<link rel="canonical" href="http://inlmouse.github.io/sdchunmomo/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://inlmouse.github.io/13thNUMCFQ9/","path":"13thNUMCFQ9/","title":"第十三届全国大学生数学竞赛决赛(数学类高年级组)第九题赏析"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://inlmouse.github.io/sdchunmomo/","path":"sdchunmomo/","title":"Stable Diffusion LoRA Model, A First Try"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>第十三届全国大学生数学竞赛决赛(数学类高年级组)第九题赏析 | Strategic Research Office of Individual Eleven</title>
+<title>Stable Diffusion LoRA Model, A First Try | Strategic Research Office of Individual Eleven</title>
   
 
 
@@ -148,7 +157,7 @@ p.spoiler {
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%81%E6%98%8E"><span class="nav-number">2.</span> <span class="nav-text">证明</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LoRA-Low-rank-Adaptation-for-Fast-Text-to-Image-Diffusion-Fine-tuning"><span class="nav-number">1.</span> <span class="nav-text">LoRA: Low-rank Adaptation for Fast Text-to-Image Diffusion Fine-tuning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Self-trained-Model-Some-Details"><span class="nav-number">2.</span> <span class="nav-text">The Self-trained Model: Some Details</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Some-Generated-Image-Results"><span class="nav-number">3.</span> <span class="nav-text">Some Generated Image Results</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Important-Statement"><span class="nav-number">4.</span> <span class="nav-text">Important Statement</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -209,7 +218,7 @@ p.spoiler {
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://inlmouse.github.io/13thNUMCFQ9/">
+    <link itemprop="mainEntityOfPage" href="http://inlmouse.github.io/sdchunmomo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -222,12 +231,12 @@ p.spoiler {
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="第十三届全国大学生数学竞赛决赛(数学类高年级组)第九题赏析 | Strategic Research Office of Individual Eleven">
-      <meta itemprop="description" content="The Solution of the Final Round of the 13th National College Student Mathematics Competition (Mathematics Category, Senior Group) Q9.(in Chinese)">
+      <meta itemprop="name" content="Stable Diffusion LoRA Model, A First Try | Strategic Research Office of Individual Eleven">
+      <meta itemprop="description" content="Technical details of a self-trained LoRA model. 一个自己训练的LoRA模型的技术细节。(in English)">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          第十三届全国大学生数学竞赛决赛(数学类高年级组)第九题赏析
+          Stable Diffusion LoRA Model, A First Try
         </h1>
 
         <div class="post-meta-container">
@@ -239,7 +248,7 @@ p.spoiler {
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2023-03-30 08:38:09 / Modified: 17:03:57" itemprop="dateCreated datePublished" datetime="2023-03-30T08:38:09+08:00">2023-03-30</time>
+      <time title="Created: 2023-04-16 10:00:00 / Modified: 12:35:40" itemprop="dateCreated datePublished" datetime="2023-04-16T10:00:00+08:00">2023-04-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -247,7 +256,7 @@ p.spoiler {
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Mathematical-Competition/" itemprop="url" rel="index"><span itemprop="name">Mathematical Competition</span></a>
+          <a href="/categories/AIGC/" itemprop="url" rel="index"><span itemprop="name">AIGC</span></a>
         </span>
     </span>
 
@@ -261,7 +270,7 @@ p.spoiler {
     </span>
 </div>
 
-            <div class="post-description">The Solution of the Final Round of the 13th National College Student Mathematics Competition (Mathematics Category, Senior Group) Q9.(in Chinese)</div>
+            <div class="post-description">Technical details of a self-trained LoRA model. 一个自己训练的LoRA模型的技术细节。(in English)</div>
         </div>
       </header>
 
@@ -269,41 +278,36 @@ p.spoiler {
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>本题目是于2023年3月在中国上海华东师范大学举办的第十三届全国大学生数学竞赛决赛(数学类高年级组)中的第九题，题目考察范围广泛，需要应用灵活运用矩阵求导、概率论、高维高斯随机向量的性质、条件期望与重期望公式以及Fubini定理等少量积分技巧来解决该问题。问题本身实际为机器学习的背景，稍作修改可以变形为更为真实的应用场景，是难得值得该领域研究者品鉴的好题目。</p>
-<p>官方给出的答案太过于简略，这里给出一个详细解答。</p>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>记$p\geq 2$是整数，$\beta$是$p$维末知参数，$\boldsymbol{X}$是$p$维随机向量服从正态分布$\mathcal{N}(\boldsymbol{0}, \boldsymbol{\Sigma})$。其中$\boldsymbol{\Sigma}$是$p$阶对称正定矩阵，随机误差$\varepsilon$是1维随机变量,服从正态分布$\mathcal{N}(0, \sigma^2)$，且与$\boldsymbol{X}$独立，其中$\sigma^2&gt;0$。记$\text{sgn}(\cdot)$为符号函数，$Y = \text{sgn}(\boldsymbol{X}^{T}\beta_0+\varepsilon)$是1维随机变量。定义：<br>\begin{equation}<br>    \beta^* = \text{argmin}_{\beta\in\mathbb{R}^p}\mathbb{E}\left[(Y-\boldsymbol{X}^T\beta)^2\right].<br>\end{equation}</p>
-<ol>
-<li>请给出$\beta^*$的显式表达式。</li>
-<li>若$F(\cdot)$为$\varepsilon$的分布函数，证明：<br>\begin{equation}<br> \text{Cov}(\boldsymbol{X}, Y) = -2\text{Cov}(\boldsymbol{X}, F(-\boldsymbol{X}^T\beta_0)).<br>\end{equation}</li>
-<li>$\forall \alpha,\beta\in \mathbb{R}^p$，证明：<br>\begin{equation}<br> \mathbb{E}\left[\alpha^T\boldsymbol{X}|\beta^T\boldsymbol{X}\right] = (\alpha^T\boldsymbol{\Sigma}\beta)\left((\beta^T\boldsymbol{\Sigma}\beta)^{-1}\beta^T\boldsymbol{X}\right).<br>\end{equation}</li>
-<li>证明$\beta^*$与$\beta_0$成比例，且要求找到比例因子的显式表达式。</li>
-</ol>
-<h2 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h2><ul>
-<li>首先计算：</li>
-</ul>
-<p>\begin{aligned}<br>            \mathbb{E}\left[(Y-\boldsymbol{X}^T\beta)^2\right] &amp; = \mathbb{E}\left[1 - 2Y\boldsymbol{X}^T\beta + \beta^T\boldsymbol{X}\boldsymbol{X}^T\beta\right]\\<br>            &amp; = 1- 2\mathbb{E}\left[Y\boldsymbol{X}^T\right]\beta + \beta^T\mathbb{E}\left[\boldsymbol{X}\boldsymbol{X}^T\right]\beta\\<br>            &amp; \overset{\mathbb{E}\left[\boldsymbol{X}\right]=\boldsymbol{0}}{=} 1 - 2\text{Cov}(\boldsymbol{X},Y)\beta + \beta^T\boldsymbol{\Sigma}\beta.<br>\end{aligned}</p>
-<p>再对$\beta$求导，直接得到：</p>
-<p>\begin{aligned}<br>            \boldsymbol{0}  = \frac{\partial \left[1 - 2\text{Cov}(\boldsymbol{X},Y)\beta + \beta^T\boldsymbol{\Sigma}\beta\right]}{\partial \beta} &amp; = -2\text{Cov}(\boldsymbol{X},Y) + (\boldsymbol{\Sigma}+\boldsymbol{\Sigma}^T)\beta\\<br>            \beta^* &amp;= \boldsymbol{\Sigma}^{-1}\text{Cov}(\boldsymbol{X},Y).<br>\end{aligned}</p>
-<ul>
-<li>其次注意到：</li>
-</ul>
-<p>\begin{aligned}<br>            \text{Cov}(\boldsymbol{X},Y) &amp; \overset{\text{重期望公式}}{=} \mathbb{E}_{\varepsilon}\left[\mathbb{E}_{\boldsymbol{X}}\left[\boldsymbol{X}\text{sgn}(\boldsymbol{X}^{T}\beta_0+\varepsilon)|\varepsilon\right]\right]\\<br>            &amp; \overset{\text{Fubini定理}}{=} \mathbb{E}_{\boldsymbol{X}}\left[\mathbb{E}_{\varepsilon}\left[\boldsymbol{X}\text{sgn}(\boldsymbol{X}^{T}\beta_0+\varepsilon)|\varepsilon\right]\right]\\<br>            &amp; = \mathbb{E}_{\boldsymbol{X}}\left[F(-\boldsymbol{X}^T\beta_0)\cdot -\boldsymbol{X} + (1-F(-\boldsymbol{X}^T\beta_0))\boldsymbol{X}\right]\\<br>            &amp; = \mathbb{E}_{\boldsymbol{X}}\left[-2F(-\boldsymbol{X}^T\beta_0)\boldsymbol{X} +\boldsymbol{X}\right]\\<br>            &amp; = -2\text{Cov}(F(-\boldsymbol{X}^T\beta_0), \boldsymbol{X}).<br>\end{aligned}</p>
-<ul>
-<li>注意到两个高斯随机变量组成的二维随机向量，依旧服从高斯分布：</li>
-</ul>
-<p>\begin{equation}<br>    \begin{pmatrix}<br>        \alpha^T\boldsymbol{X} \\<br>        \beta^T\boldsymbol{X}<br>    \end{pmatrix}<br>    \sim\mathcal{N}<br>    \left(<br>    \begin{pmatrix}<br>        0 \\<br>        0<br>    \end{pmatrix},<br>    \begin{pmatrix}<br>        \alpha^T\boldsymbol{\Sigma}\alpha &amp;  \alpha^T\boldsymbol{\Sigma}\beta\\<br>        \beta^T\boldsymbol{\Sigma}\alpha &amp; \beta^T\boldsymbol{\Sigma}\beta<br>    \end{pmatrix}<br>    \right).<br>\end{equation}<br> 那么其条件期望可以直接计算<sup><a href="#fn_1" id="reffn_1">1</a></sup>得到：<br>\begin{equation}\label{equ:condexpexe9}<br>        \mathbb{E}\left[\alpha^T\boldsymbol{X}|\beta^T\boldsymbol{X}\right] = (\alpha^T\boldsymbol{\Sigma}\beta)\left((\beta^T\boldsymbol{\Sigma}\beta)^{-1}\beta^T\boldsymbol{X}\right). \tag{1}<br>\end{equation}</p>
-<ul>
-<li>根据\ref{equ:condexpexe9}式，令$\alpha=\text{diag}(1,\cdots,1) = \boldsymbol{E}$为单位阵有：</li>
-</ul>
-<p>\begin{aligned}<br>        \mathbb{E}\left[\boldsymbol{X} F(-\boldsymbol{X}^T\beta_0)\right] &amp;\overset{\text{重期望公式}}{=} \mathbb{E}\left[\mathbb{E}\left[\boldsymbol{X} F(-\boldsymbol{X}^T\beta_0)|\boldsymbol{X}^T\beta_0\right]\right]\\<br>            &amp; = \boldsymbol{\Sigma}\beta_0(\beta_0^T\boldsymbol{\Sigma}\beta_0)^{-1}\text{Cov}(\boldsymbol{X}^T \beta_0, F(-\boldsymbol{X}^T\beta_0)).<br>\end{aligned}</p>
-<p>综上几问的结果我们有：</p>
-<p>\begin{aligned}<br>        \beta^* &amp; = \boldsymbol{\Sigma}^{-1}\text{Cov}(\boldsymbol{X},Y) \\<br>        &amp; = -2\boldsymbol{\Sigma}^{-1}\text{Cov}(F(-\boldsymbol{X}^T\beta_0), \boldsymbol{X})\\<br>        &amp; = -2\boldsymbol{\Sigma}^{-1}\boldsymbol{\Sigma}\beta_0(\beta_0^T\boldsymbol{\Sigma}\beta_0)^{-1}\text{Cov}(\boldsymbol{X}^T \beta_0, F(-\boldsymbol{X}^T\beta_0))\\<br>        &amp; = -2\left[ (\beta_0^T\boldsymbol{\Sigma}\beta_0)^{-1}\text{Cov}(\boldsymbol{X}^T \beta_0, F(-\boldsymbol{X}^T\beta_0)) \right]\beta_0\\<br>        &amp; = c\beta_0.<br>\end{aligned}</p>
-<p>其中，记$f$为$\varepsilon$的密度函数，令$\boldsymbol{X}^T\beta_0 = Z\sim\mathcal{N}(0,\sigma’^2)$，$\sigma’^2 = \beta_0^T\boldsymbol{\Sigma}\beta_0$有密度函数$\rho(x)$。注意到$x\rho(x) = -\sigma’^2\rho’(x)$：</p>
-<p>\begin{aligned}<br>        \mathbb{E}\left[ZF(-Z)\right] &amp; = \int_{\mathbb{R}}xF(-x)\rho(x)\text{d} x = -\sigma’^2\int_{\mathbb{R}}F(-x)\text{d} \rho(x)\\<br>        &amp; \overset{\text{分部积分}}{=} -\sigma’^2\underbrace{\left.F(-x)\rho(x)\right|_{-\infty}^{+\infty}}_{=0} - \sigma’^2\int_{\mathbb{R}}f(-x)\rho(x)\text{d} x = - \sigma’^2\mathbb{E}\left[f(-Z)\right]\\<br>        &amp; = -\int_{\mathbb{R}}\frac{\sigma’^2}{2\pi\sigma\sigma’}\exp\left(-\frac{x^2}{2}(1/\sigma^2+1/\sigma’^2)\right)\text{d} x\\<br>        &amp; = -\frac{\sigma’^2}{\sqrt{2\pi(\sigma^2+\sigma’^2)}}.<br>\end{aligned}</p>
-<p>因此根据上式，得到比例常数$c$：<br>\begin{aligned}<br>        c &amp;= -2(\beta_0^T\boldsymbol{\Sigma}\beta_0)^{-1}\text{Cov}(\boldsymbol{X}^T \beta_0, F(-\boldsymbol{X}^T\beta_0)) = -2(\beta_0^T\boldsymbol{\Sigma}\beta_0)^{-1}\mathbb{E}\left[\boldsymbol{X}^T \beta_0F(-\boldsymbol{X}^T\beta_0)\right]\\<br>        &amp; = 2(\beta_0^T\boldsymbol{\Sigma}\beta_0)^{-1}\frac{(\beta_0^T\boldsymbol{\Sigma}\beta_0)}{\sqrt{2\pi(\sigma^2+\beta_0^T\boldsymbol{\Sigma}\beta_0)}}\\<br>        &amp; = \sqrt{\frac{2}{\pi(\sigma^2+\beta_0^T\boldsymbol{\Sigma}\beta_0)}}.<br>\end{aligned}</p>
-<blockquote id="fn_1">
-<sup>1</sup>. 该公式的证明过程可以参考<a target="_blank" rel="noopener external nofollow noreferrer" href="https://stats.stackexchange.com/questions/30588">这里</a>.  <a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
-</blockquote>
+        <p>After the craziest March in the recent history of AI development, everyone has witnessed the powerful capabilities of generative AI. In the field of computer vision, there have been countless AIGC (AI-generated content) methods and tools, such as GigaGAN, Stable Diffusion, DALL·E2, MidJourney, LoRA, and many more, whose results are stunning and awe-inspiring.</p>
+<p>I had planned to write a technical report, sort-out and studying <strong>generative models from the perspective of probability theory</strong>. With a rigorous attitude, I intended to first experiment with the capabilities of these new technologies before writing this note. However, things spiraled out of control, and even though I had already played around with things like StyleTransfer 8 years ago, I still found them extremely fascinating.</p>
+<p>I spent some time training a Stable Diffusion RoLA model(<a target="_blank" rel="noopener external nofollow noreferrer" href="https://civitai.com/models/41309/chunmomo">civitai link</a>), this post will demonstrate some technical details.</p>
+<img src="/sdchunmomo/00074-383632874.png" class width="512" height="768"> 
+<center> The generated image sample, which have an extremely high level of completion to the human eyes.</center>
+
+<h2 id="LoRA-Low-rank-Adaptation-for-Fast-Text-to-Image-Diffusion-Fine-tuning"><a href="#LoRA-Low-rank-Adaptation-for-Fast-Text-to-Image-Diffusion-Fine-tuning" class="headerlink" title="LoRA: Low-rank Adaptation for Fast Text-to-Image Diffusion Fine-tuning"></a>LoRA: Low-rank Adaptation for Fast Text-to-Image Diffusion Fine-tuning</h2><p>Many people like to fine-tune stable diffusion models to fit their needs and generate higher fidelity images. However, the fine-tuning process is very slow, and finding a good balance between the number of steps and the quality of the results is not easy. Furthermore, the final output of a fully fine-tuned model is very large. Some people use textual inversion as an alternative method, but clearly this is not optimal: textual inversion only creates a small word embedding, resulting in a final image that is not as good as that produced by a fully fine-tuned model.</p>
+<p>As the results, LoRA came out. <a target="_blank" rel="noopener external nofollow noreferrer" href="https://arxiv.org/abs/2106.09685">LoRA</a> stands for Low-Rank Adaptation, a mathematical technique to deal with the problem of fine-tuning LLMs and reduce the number of parameters that are trained. The idea is very simple. Just like ResNet, training residuals instead of the model itself, which is indeed the work of Microsoft Research. By applying LoRA to cross-attention layers, It links image representations with prompts describing them. </p>
+<img src="/sdchunmomo/latent-diffusion.png" class width="800" height="397"> 
+<center> Latent Diffusion Models(https://arxiv.org/abs/2112.10752), which is used to fine-turn high resolution images in stable diffusion. The yellow blocks are cross-attention layers.</center>
+
+<h2 id="The-Self-trained-Model-Some-Details"><a href="#The-Self-trained-Model-Some-Details" class="headerlink" title="The Self-trained Model: Some Details"></a>The Self-trained Model: Some Details</h2><p>This LoRA model is trained by a non-NSFW subset of the photobook of the famous cosplayer Chunmomo(蠢沫沫). <strong>So it won’t work well with NSFW prompts</strong>.</p>
+<p>I manually selected 96 face images and 259 bust/full body images, as shown in the figure below. The selection of face concept set is to use images with no occlusion and a single background as much as possible.<br><img src="/sdchunmomo/face.png" class width="880" height="408"> </p>
+<center> Face concept set.</center>
+<img src="/sdchunmomo/body.png" class width="880" height="408"> 
+<center> Body concept set.</center>
+
+<p>The training process has gone through 50 epochs, and each concept have trained 10 times. Image resolution 512x768, batch size 1(RTX 2080 8GB). </p>
+<img src="/sdchunmomo/loss.png" class width="1038" height="336"> 
+<p>After 19.5 hours of waiting, I finally got the LoRA model. </p>
+<h2 id="Some-Generated-Image-Results"><a href="#Some-Generated-Image-Results" class="headerlink" title="Some Generated Image Results"></a>Some Generated Image Results</h2><img src="/sdchunmomo/00071-3836818767.png" class width="512" height="768"> 
+<center> Key Prompts: white_dress, sailor_collar, sailor_dress, polka_dot, straw_hat, v_arm</center>
+<img src="/sdchunmomo/00062-6173687.png" class width="512" height="768"> 
+<center> Key Prompts: goggles, goggles_on_head, shorts, socks, long_sleeves, street, outdoor</center>
+<img src="/sdchunmomo/00067-1673675340.png" class width="512" height="768"> 
+<center> Key Prompts: goggles, goggles_on_head, shorts, socks, short_sleeves, ocean, water, twin_braids</center>
+<img src="/sdchunmomo/00043-281637387.png" class width="512" height="768"> 
+<center> Key Prompts: sailor_collar, sailor_dress, pleated_skirt, ponytail, cross_arm, sitting</center>
+
+<h2 id="Important-Statement"><a href="#Important-Statement" class="headerlink" title="Important Statement"></a>Important Statement</h2><p><strong>This model is for academic research use only, commercial use is strictly prohibited. Use of this model to generate NSFW content, as well as any use that compromises individual rights and privacy is prohibited.</strong></p>
 
     </div>
 
@@ -321,7 +325,7 @@ p.spoiler {
   </li>
   <li class="post-copyright-link">
       <strong>Post link: </strong>
-      <a href="http://inlmouse.github.io/13thNUMCFQ9/" title="第十三届全国大学生数学竞赛决赛(数学类高年级组)第九题赏析">http://inlmouse.github.io/13thNUMCFQ9/</a>
+      <a href="http://inlmouse.github.io/sdchunmomo/" title="Stable Diffusion LoRA Model, A First Try">http://inlmouse.github.io/sdchunmomo/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -330,23 +334,19 @@ p.spoiler {
 </div>
 
           <div class="post-tags">
-              <a href="/tags/Math/" rel="tag"># Math</a>
-              <a href="/tags/Matrix-Analysis/" rel="tag"># Matrix Analysis</a>
-              <a href="/tags/Probability-Theory/" rel="tag"># Probability Theory</a>
+              <a href="/tags/Stable-Diffusion/" rel="tag"># Stable Diffusion</a>
+              <a href="/tags/LoRA/" rel="tag"># LoRA</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/fisherinfo/" rel="prev" title="Fisher Information and Its Application">
-                  <i class="fa fa-chevron-left"></i> Fisher Information and Its Application
+                <a href="/13thNUMCFQ9/" rel="prev" title="第十三届全国大学生数学竞赛决赛(数学类高年级组)第九题赏析">
+                  <i class="fa fa-chevron-left"></i> 第十三届全国大学生数学竞赛决赛(数学类高年级组)第九题赏析
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/sdchunmomo/" rel="next" title="Stable Diffusion LoRA Model, A First Try">
-                  Stable Diffusion LoRA Model, A First Try <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
