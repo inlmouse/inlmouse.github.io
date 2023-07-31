@@ -6,7 +6,7 @@
   <link href="http://inlmouse.github.io/atom.xml" rel="self"/>
   
   <link href="http://inlmouse.github.io/"/>
-  <updated>2023-04-16T04:37:48.776Z</updated>
+  <updated>2023-07-31T07:26:15.107Z</updated>
   <id>http://inlmouse.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Method of Steepest Descent in Numerical Analysis</title>
+    <link href="http://inlmouse.github.io/SteepestDescent/"/>
+    <id>http://inlmouse.github.io/SteepestDescent/</id>
+    <published>2023-07-31T03:43:17.000Z</published>
+    <updated>2023-07-31T07:26:15.107Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="最速下降法"><a href="#最速下降法" class="headerlink" title="最速下降法"></a>最速下降法</h2><p>最速下降法<sup><a href="#fn_1" id="reffn_1">1</a></sup>，也称为鞍点法(saddle-point method)，作为Laplace方法的在复分析中的应用[1,2]，辅之以留数定理，以找出一个过最速下降点的contour<sup><a href="#fn_2" id="reffn_2">2</a></sup>的曲线积分，用来取代原有的复数空间的contour积分。该方法是估计型如下的积分：<br>\begin{equation}<br>    I(\lambda) = \int_C f(z)e^{\lambda g(z)}{\mathrm d} z.<br>\end{equation}<br>其中$C$为contour，对于$\lambda \rightarrow \infty$, $f(z),g(z)$为$z$的解析函数。由于被积函数解析，contour $C$可以被另一条性质更好的contour $C’$而不改变积分。特别的，我们选取contour $C’$使得$\Im(g(z))$为常数，剩余部分的估计可以退化为Laplace方法进行估计。</p><p>也即是：<br>\begin{equation}<br>    I(\lambda) = \int_C f(z)e^{\lambda g(z)}{\mathrm d} z = e^{i\lambda \Im(g(z))}\int_{C’}f(z)e^{\lambda \Re(g(z))} {\mathrm d} z.<br>\end{equation}</p><p>由于该方法中，已经利用另一条通过最速下降的鞍点来取代原有的contour积分，经过变数变换后就会变得有如拉普拉斯方法。因此，我们可以透过这新的contour，找到原本的积分的渐进近似解，而这将大大的简化整个计算，得名最速下降法。就好像原本的路径像是在蜿蜒的山路开车，而新的路径就像干脆绕过这座山开，反正目的只是到达目的地而已，留数定理已经帮我们把中间的差都算好了。</p><blockquote id="fn_1"><sup>1</sup>. 尤其注意该方法不同于优化算法中的梯度下降法(gradient descent)。<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a></blockquote><blockquote id="fn_2"><sup>2</sup>. 翻译为”路径”的话，会与path integral相冲，因此这里还是以英文原字称呼。<a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a></blockquote><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>考察积分：<br>\begin{equation}<br>    I(\lambda) = \int_0^1 \cos(\lambda x)\ln x{\mathrm d} x.<br>\end{equation}<br>在$\lambda \to \infty$的渐进数值特性。</p><p>考虑：<br>\begin{equation}<br>    J(\lambda) = \int_0^1 e^{i\lambda z}\ln z{\mathrm d} z.<br>\end{equation}<br>显然$I(\lambda) = \Re(J(\lambda))$。考虑复平面上三点：$P(1,0), Q(0, R),S(1,R)$，那么由柯西积分定理，原积分路径$OP$可以更变为$OQSP$。</p><p>接下来我们令$R\to\infty$，那么积分中$QS$段中由于被积函数$e^{-\lambda R}$项的存在，其贡献趋近于0。那么在$OQ$段记$z=is$，$SP$段记$z=1+is$：<br>\begin{equation}<br>    I(\lambda) = \Re \left[\int_0^\infty e^{-\lambda s}\ln(is){\mathrm d} is\right] -  \Re \left[\int_0^\infty e^{-\lambda s + i\lambda }\ln(1+is){\mathrm d} is\right].<br>\end{equation}<br>其中右边第二个积分的符号是负的因为$SP$向下遍历。</p><p>注意到有恒等式：<br>\begin{equation}<br>    \ln(is) = \ln(se^{i\frac{\pi}{2}}) = \ln(s) + i\frac{\pi}{2}.<br>\end{equation}</p><p>那么：<br>\begin{equation}<br>    \Re \left[\int_0^\infty e^{-\lambda s}\ln(is){\mathrm d} is\right] = \int_0^\infty e^{-\lambda s}\Re\left( i \ln(s) - \frac{\pi}{2} \right){\mathrm d} s = -\frac{\pi}{2\lambda}.<br>\end{equation}</p><p>同理：<br>\begin{equation}<br>    \begin{aligned}<br>        \Re \left[\int_0^\infty e^{-\lambda s + i\lambda }\ln(1+is){\mathrm d} is\right] &amp; = \Re \left[e^{i\lambda} \int_0^\infty e^{-\lambda s}i\ln(1+is){\mathrm d} s\right]\\<br>        &amp;\overset{\ln(1+is)\approx is}{\approx} \Re (e^{i\lambda})\int_0^\infty e^{-\lambda s}s{\mathrm d} s\\<br>        &amp;=-\frac{\cos\lambda}{\lambda^2}.<br>    \end{aligned}<br>\end{equation}</p><p>综上二式，得到：<br>\begin{equation}\label{equ:approxmsd}<br>     I(\lambda) = \int_0^1 \cos(\lambda x)\ln x{\mathrm d} x \approx -\frac{\pi}{2\lambda}+\frac{\cos\lambda}{\lambda^2}.<br>\end{equation}</p><img src="/SteepestDescent/appA.png" class width="400" height="250"> <center> 在$2\leq \lambda \leq 20$的逼近效果。实线为估计式的数值结果，虚线为原积分的数值结果。</center><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[1]: Bender C M, Orszag S A. Advanced mathematical methods for scientists and engineers I: Asymptotic methods and perturbation theory[M]. Springer Science &amp; Business Media, 1999.<br>[2]: Jones L M. Introduction to mathematical methods of physics[J]. 1979.</p>]]></content>
+    
+    
+    <summary type="html">An introduction of an special extension of Laplace&#39;s method for approximating an integral.(in Chinese)</summary>
+    
+    
+    
+    <category term="Numerical Analysis" scheme="http://inlmouse.github.io/categories/Numerical-Analysis/"/>
+    
+    
+    <category term="Math" scheme="http://inlmouse.github.io/tags/Math/"/>
+    
+    <category term="Complex Analysis" scheme="http://inlmouse.github.io/tags/Complex-Analysis/"/>
+    
+  </entry>
   
   <entry>
     <title>Stable Diffusion LoRA Model, A First Try</title>
