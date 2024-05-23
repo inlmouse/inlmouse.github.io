@@ -4,7 +4,16 @@
   <url>
     <loc>http://inlmouse.github.io/about/index.html</loc>
     
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://inlmouse.github.io/KAN/</loc>
+    
+    <lastmod>2024-05-23</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -112,7 +121,7 @@
 
   <url>
     <loc>http://inlmouse.github.io/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -120,112 +129,112 @@
   
   <url>
     <loc>http://inlmouse.github.io/tags/politic/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/tags/Math/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/tags/Information-Theory/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/tags/Machine-Learning/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/tags/Mathematical-Analysis/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/tags/GEE/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/tags/Advanced-Algebra/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/tags/Statistic/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/tags/Matrix-Analysis/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/tags/Probability-Theory/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/tags/Stable-Diffusion/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/tags/LoRA/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/tags/Complex-Analysis/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/tags/Replica-Method/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/tags/SK-Model/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/tags/Boltzmann-Machine/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -234,56 +243,56 @@
   
   <url>
     <loc>http://inlmouse.github.io/categories/Political-Commentary/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/categories/Signal-Processing/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/categories/Machine-Learning/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/categories/Graduate-Entrance-Examination/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/categories/Mathematical-Competition/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/categories/AIGC/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/categories/Numerical-Analysis/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://inlmouse.github.io/categories/Statistical-Physics/</loc>
-    <lastmod>2023-08-02</lastmod>
+    <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

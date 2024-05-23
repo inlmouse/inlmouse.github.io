@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"inlmouse.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="An Introduction to Kolmogorov-Arnold Networks.(in Chinese)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kolmogorov-Arnold Networks">
+<meta property="og:url" content="http://inlmouse.github.io/KAN/index.html">
+<meta property="og:site_name" content="Strategic Research Office of Individual Eleven">
+<meta property="og:description" content="An Introduction to Kolmogorov-Arnold Networks.(in Chinese)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://inlmouse.github.io/KAN/KART.png">
+<meta property="og:image" content="http://inlmouse.github.io/KAN/KARTplot.png">
+<meta property="og:image" content="http://inlmouse.github.io/KAN/KAN.png">
+<meta property="og:image" content="http://inlmouse.github.io/KAN/KAN.gif">
+<meta property="og:image" content="http://inlmouse.github.io/KAN/KANvsMLP.png">
+<meta property="og:image" content="http://inlmouse.github.io/KAN/Bsplines.png">
+<meta property="og:image" content="http://inlmouse.github.io/KAN/Training.png">
+<meta property="og:image" content="http://inlmouse.github.io/KAN/FitRes.png">
+<meta property="og:image" content="http://inlmouse.github.io/KAN/SFRes.png">
+<meta property="og:image" content="http://inlmouse.github.io/KAN/Forgetting.png">
+<meta property="article:published_time" content="2024-05-23T05:25:59.000Z">
+<meta property="article:modified_time" content="2024-05-23T06:01:10.633Z">
+<meta property="article:author" content="Patrick Sylvestre">
+<meta property="article:tag" content="Machine Learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://inlmouse.github.io/KAN/KART.png">
+
+
+<link rel="canonical" href="http://inlmouse.github.io/KAN/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://inlmouse.github.io/KAN/","path":"KAN/","title":"Kolmogorov-Arnold Networks"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Kolmogorov-Arnold Networks | Strategic Research Office of Individual Eleven</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style type="text/css">
+.spoiler {
+  display: inline-flex;
+}
+p.spoiler {
+  display: flex;
+}
+.spoiler a {
+  pointer-events: none;
+}
+.spoiler-blur, .spoiler-blur > * {
+  transition: text-shadow .5s ease;
+}
+.spoiler .spoiler-blur, .spoiler .spoiler-blur > * {
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  text-shadow: 0 0 10px grey;
+  cursor: pointer;
+}
+.spoiler .spoiler-blur:hover, .spoiler .spoiler-blur:hover > * {
+  text-shadow: 0 0 5px grey;
+}
+.spoiler-box, .spoiler-box > * {
+  transition: color .5s ease,
+  background-color .5s ease;
+}
+.spoiler .spoiler-box, .spoiler .spoiler-box > * {
+  color: black;
+  background-color: black;
+  text-shadow: none;
+}</style><link rel="alternate" href="/atom.xml" title="Strategic Research Office of Individual Eleven" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Strategic Research Office of Individual Eleven</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Frontier Explorer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Articles</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About Me</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E6%9C%BA%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">数学机理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KAN%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">KAN的结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E7%BB%86%E8%8A%82"><span class="nav-number">3.</span> <span class="nav-text">算法细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8%E5%92%8C%E6%95%88%E6%9E%9C"><span class="nav-number">4.</span> <span class="nav-text">性质和效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E4%B8%8E%E6%89%B9%E8%AF%84"><span class="nav-number">5.</span> <span class="nav-text">应用与批评</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Patrick Sylvestre"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Patrick Sylvestre</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">articles</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/inlmouse" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;inlmouse" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:accelouch@gmail.com" title="E-Mail → mailto:accelouch@gmail.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://inlmouse.github.io/KAN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Patrick Sylvestre">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Strategic Research Office of Individual Eleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Kolmogorov-Arnold Networks | Strategic Research Office of Individual Eleven">
+      <meta itemprop="description" content="An Introduction to Kolmogorov-Arnold Networks.(in Chinese)">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kolmogorov-Arnold Networks
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-05-23 13:25:59 / Modified: 14:01:10" itemprop="dateCreated datePublished" datetime="2024-05-23T13:25:59+08:00">2024-05-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">An Introduction to Kolmogorov-Arnold Networks.(in Chinese)</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="数学机理"><a href="#数学机理" class="headerlink" title="数学机理"></a>数学机理</h2><p>基于Universal Approximation Theorem(UAT)的Multilayer Perceptron(MLP)作为构建神经网络的基本组件，由于其可以拟合任意函数的能力其本身及其变体在过去几十年来被广泛使用。然而由于其不可解释性，长期以来饱受诟病。近日，一个基于Kolmogorov-Arnold Representation Theorem(KART)的新神经网络结构Kolmogorov-Arnold Network(KAN)[5]被提出，在各项指标中都有替代MLP之势。本文对这个新结构KAN进行简单解读。</p>
+<p>首先重述一下MLP的原理，ML本质上是寻找/拟合一个尽可能逼近一个需要但不一定完全正确的函数。那么为什么MLP如此naïve的结构可以拟合我们可能想寻找的万千函数？UAT告诉我们，在包含足够多隐层神经元的FNN可以以任意精度近似任何连续函数。也即是，无论我们的目标函数有多复杂，一定存在一个NN可以以任意高的精度去近似，进一步地，也即是NN理论上可以解决任何近似问题，这也是近年PINN在求解ODE/PDE上大放异彩的原因。</p>
+<p><strong>Theorem 1</strong>(Universal Approximation Theorem[1]). $\forall n,m \in \mathbb{N}, \varepsilon &gt; 0$，闭区间$K \subseteq \mathbb{R}^n$及其上的连续函数$f: K \mapsto \mathbb{R}^m$，存在$k\in \mathbb{N}, W\in \mathbb{R}^{k\times n}, b\in \mathbb{R}^{k}, C\in \mathbb{R}^{m\times k}$，使得：<br>\begin{equation}<br>    \sup_{x\in K}|f(x)-C\cdot(\sigma\circ(W\cdot x+b))| &lt; \varepsilon.<br>\end{equation}<br>其中$\sigma:\mathbb{R}\mapsto\mathbb{R}$为激活函数。</p>
+<p>但是遗憾的是，这个定理是一个存在性定理，定理本身没有给出如何构造的指导，关于如何更好逼近的大量工作都是经验性的。同时在很多结构中，例如Transformer，MLP的参数量异常巨大，这给NN的可解释性问题更加蒙上了一层阴影。为此，业界一直在寻找MLP的一种替代性方案，目标是使用更少的参数获得同等或者更好的效果，并且具有较强的可解释性。</p>
+<p>早在1993年，就有研究发现KART在多层感知器的研究中扮演着类似于通用逼近定理的角色[2]，本文的工作也启发自KART。Theorem 2即是KART的表述。</p>
+<p><strong>Theorem 2</strong>(Kolmogorov-Arnold Representation Theorem[3]). 如果$f$是多元连续函数，则$f$可以写成单变量连续函数与二元加法运算的有限复合。也即是：<br>\begin{equation}<br>    f(\mathbf {x} )=f(x_{1},\ldots ,x_{n})=\sum _{q=0}^{2n+1}\Phi _{q}\left(\sum _{p=1}^{n}\phi _{q,p}(x_{p})\right).<br>\end{equation}<br>其中：$\phi_{q,p}: [0,1]\to \mathbb{R}, \Phi_{q}: \mathbb{R} \to \mathbb{R}$。</p>
+<p>这个定理还给出了一个重要的陈述：多元函数的本质就是加法，因为均可以由一元函数和加法构造出来[4]。这里再给出一个$n=2$的示例，如图1所示。</p>
+<img src="/KAN/KART.png" class width="540" height="270"> 
+<center> 图1：$n=2$的KART示例图。</center>
+
+<p>注意到无论是外层函数$\Phi$还是内层函数$\phi$这里都是一元函数，一个直观的理解就是可以直接用图像表示出来，如图2所示。</p>
+<img src="/KAN/KARTplot.png" class width="535" height="275"> 
+<center> 图2：$n=2$的KART示例图，将一元函数用图像表示。</center>
+
+<h2 id="KAN的结构"><a href="#KAN的结构" class="headerlink" title="KAN的结构"></a>KAN的结构</h2><p>注意到KART的表示可以立马转换为一个网络，这早在上世纪九十年代就有人意识到了，当时叫Kolmogorov Network特指这个两层的单输出结构，如图3所示。那么自然的，这结构可以类似于MLP的抽象，并且定义为KAN Layer。并且可以把网络做得更深。<br><img src="/KAN/KAN.png" class width="570" height="345"> </p>
+<center> 图3：KAN结构的抽象。</center>
+
+<p>KART明确两层结构就可以完成拟合任务，那么为什么我们需要研究更深的KAN结构呢？实际上KART没有约束函数ϕ的数学性质，有可能是病态甚至是分形的。我们更希望使用光滑可导的函数来表达目标，以期能使用更方便的优化方式。</p>
+<p>举个例子，$e^{\sin(x_1^2+x_2^2)+\sin(x_3^2+x_4^2)}$这个结构确实需要三层的结构去拟合。如动图4所示就是其训练的过程，我们发现如果是一层3层的KAN，那么在训练结束后确实可以在每一层得到和理论结果对应的激活函数。</p>
+<img src="/KAN/KAN.gif" class width="300" height="400"> 
+<center> 动图4：一个三层KAN的训练过程。</center>
+
+<p>如图5所示，展示了MLP和KAN的一些对比。值得一提的是，MLP和KAN背后的表示论基础，也即是UAT和KART，这二者之间的联系还相当不清楚，这二者孰优孰劣也没有定论。就模型结构而言，二者一个主要差别是MLP的激活函数在模型节点上，而KAN是在边上。</p>
+<img src="/KAN/KANvsMLP.png" class width="560" height="350"> 
+<center> 图5：KAN vs MLP。</center>
+
+<h2 id="算法细节"><a href="#算法细节" class="headerlink" title="算法细节"></a>算法细节</h2><p>本节将简单描述一下KAN在实现过程中的一些算法细节，虽然原论文中的理论做了一些理论上的证明以期保证了其收敛，但其实算法本身非常简单几句话就能说明白，这也是这个工作较为难能可贵的地方。</p>
+<p>第一个问题是，如何把上面所说的一元函数转化为或者参数化为一个可学习的激活函数。那么本质上就是构造一种一元函数，样条函数应该是一个不错的选择。简单来说，样条函数就是一种分段函数，在每一段都具有连续的导数，最后。在论文中使用了B样条，如图6所示，B样条可以设置一些样条基函数，最后这个样条函数就是这些基函数的线性组合。所以真正学习的参数就是这个线性组合的系数$c_i$。样条函数一般在低维空间的函数逼近任务上效果很好，因此这个选择可以说是很自然的，同时注意到基函数具有连续导数，那么整个网络就是可导的，也即可以使用BP来训练。而B样条的基函数可以使用Cox-de Boor递归公式来定义，这个公式很优雅，但是涉及到递归求解，所以这一步是比较耗时的。样条函数还有个好处就是，我们可以在不同的分段细粒度上面切换，如图6所示，$G_1=5$和$G_2=10$分别就是一个比较粗和比较细的网格划分，这个好处就是在网络结构正确的情况下，如果我们有更多的数据，我们不需要重新训练网络，只需要把网格划分变细，就能简单地得到一个更好的网络。</p>
+<img src="/KAN/Bsplines.png" class width="985" height="455"> 
+<center> 图6：左:流经网络的激活符号。右:激活函数是参数化为B样条，它允许在粗粒度和细粒度网格之间切换。</center>
+
+<p>在原始的实现中，作者使用了一些技巧，与其是技巧，不如说是实际上是作者尝试的很多方法中，他试出来第一个能work的结果。作者承认在这一部分还有更多的优化空间。第一个trick是Residual activation functions，如果我们一开始就直接把激活函数设置为样条，那大概率这是一些局部光滑但全局不那么光滑的函数，它对于loss landscape是不好的。因此作者在样条函数之上添加了一个光滑的基座作为初始化，这里选用了SiLU函数。样条的系数初始化几乎为0，这个和残差链接有一点相似。第二个是激活范围的问题，这个在MLP当中也存在，一般希望节点激活输出后，激活值尽可能保持在区间$[0,1]$之间，这里选用的方案是把基函数系数$c_i\sim\mathcal{N}(0,\sigma^2)$，方差$\sigma$是一个较小的数。在整体外设置权重$w$来控制整体激活函数的幅值，并且和MLP同样使用Xavier初始化。最后一点是，由于样条函数的定义域是有界的，而每一层的输出并不确定，所以自然需要动态地更新这个网格区间，作者经过了相当多的尝试后，采用了每训练迭代20次，对节点输出的范围做一次估计，根据其分布再来重新划定区间。</p>
+<p>把细节讲明白之后最后我们完整地讲讲其训练过程。首先从一个全连接的KAN开始，第一步是通过一个修改过的L1正则把网络变得更稀疏，把较小权重的链接剪枝；有意思的地方来了，由于一元函数的图像人类是比较熟悉的，这时候根据观察一元函数的图像以及其具体值，人类是可以猜测这个一元函数的的符号形式，如图7所示，猜测这个结果是正弦、平方和指数函数，全部设置完毕后，求解出来的结果是可以达到机器精度的。这样是可以求解出正切的符号公式的，这个决策过程相当透明化，也具有很强的可信度和可解释性。虽然这个学习也可以全自动化不需要人类干预，但是实际上在很多任务下，就是需要人类先验知识才能获得更好的效果。</p>
+<img src="/KAN/Training.png" class width="835" height="425"> 
+<center> 图7：一个如何用KAN进行符号回归的例子。</center>
+
+<h2 id="性质和效果"><a href="#性质和效果" class="headerlink" title="性质和效果"></a>性质和效果</h2><p>上面我们讲了KAN是什么，接下来我们来介绍KAN有上面好处，更中性的说法是首先尽量理解其性质再说它的好处。</p>
+<p>首先我们注意到的是这个Scaling性质，这个在摩尔定律和LLM中有很多体现。简而言之就是模型的参数量越多其表现越好。不严谨地讲，具体到公式(Neural scaling laws)上就是$\ell\propto N^{-\alpha}$，其中$\ell$是近似误差(Loss/Error)，$N$是参数量，$\alpha$是缩放比例指数(scaling exponent)[6]。就$d$元的样条函数而言，$\alpha=(k+1)/d$，其中$k$是基函数的阶。而根据KART，这里的$d=1$。很显然，这是一个比较理想的界，比MLP的理论上界要好很多。</p>
+<p>正是因为 KAN 的收敛速度比 MLP 更快，因此具有较少参数的KAN比MLP 可以获得更加的准确性的准确性，如图8所示。即便是特殊函数，如图9所示，我们用模型参数的数量和RMSE损失在平面上展示了KAN和MLP的Pareto Frontiers 。在所有特殊函数中，KAN都比MLP具有更好的Pareto Frontiers(关于Pareto Frontiers的概念请参考[7])。</p>
+<img src="/KAN/FitRes.png" class width="980" height="210"> 
+<center> 图8：用5个玩具模型来比较KAN和MLP。KANs几乎可以饱和我们的理论预测的最快缩放定律($\alpha = 4$)，而MLP收敛相对缓慢。</center>
+
+<img src="/KAN/SFRes.png" class width="575" height="280"> 
+<center> 图9：KAN对特殊函数的拟合。</center>
+
+<p>灾难性遗忘几乎是困扰所有机器任务的问题，而KAN由于其结构具有局部可塑性，可以通过利用样条的局域性来避免灾难性遗忘。这是因为样条基函数是局部的，一个样本只会影响附近的几个样条系数，而留下较远的系数不变(这是可取的，因为较远的区域可能已经存储了我们想要保存的信息)。相比之下，由于MLP通常使用全局激活，例如，ReLU/Tanh/SiLU等，任何局部变化都可能不受控制地传播到遥远的区域，破坏存储在那里的信息。如图10所示，展示了一个简单的持续学习问题。数据集是一个具有5个高斯峰的1D回归任务(最上面一行)。每个峰值周围的数据按顺序呈现(而不是一次全部呈现)给KAN和MLP。KAN(中排)可以完全避免灾难性遗忘，而MLP(下排)则表现出严重的灾难性遗忘。</p>
+<img src="/KAN/Forgetting.png" class width="915" height="400"> 
+<center> 图10：KAN对抗灾难性遗忘。</center>
+
+<h2 id="应用与批评"><a href="#应用与批评" class="headerlink" title="应用与批评"></a>应用与批评</h2><p>由于KAN的开创性和对MLP的直接可替代性，在预印本论文发布以来，极短时间内有大量的同行对其进行了大量的改进和实验，在业内有较为重大的影响。截至目前已经有一些工作得到了同行的认可，这里我们做一个简单的介绍。</p>
+<p>针对于KAN的原本实现计算缓慢的问题， EfficientKAN将计算重新表述为用不同的基函数激活输入，然后将它们线性组合。这种重新表述可以显著降低内存成本，并使计算成为简单的矩阵乘法，并且可以自然地处理向前传递和向后传递。显著提升了其计算效率。同时，不同结构的神经网络也尝试将原来的连接方式变为了KAN链接，例如 GraphKAN和 ConvolutionKAN，也获得了一些效果。同时在大语言模型上，KAN-GPT和 Kansformer相继进行了实验，基本可以做到快速精度提升的效果。KAN作为一个即插即用的模块，基本可以无差别的对现有MLP结构做直接替换。</p>
+<p>虽然KAN在的讨论程度极高，但是其效果还没有经过大规模验证和同行评议。而美国科学院院士， PINN(Physics-Informed Neural Network)发明者，布朗大学George Karniadakis教授在社交网络上公开质疑KAN的效果，原论文声称KAN在求解ODE/PDE有很好的效果，但是George院士表示使用了KAN作者在GitHub上的代码给对求解NS方程出了完全错误的结果，甚至对最简单的泊松方程的求解都得到了24%的误差。此外，论文对于光滑样条后的存在性证明也没有良好的叙述，什么样的目标函数能够使用KAN进行表述这在数学上没有保证或者限制，边界条件没有做任何讨论。目前做PDE/ODE的科学家对该方法的有效性大规模存疑。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[1]: Funahashi K I. On the approximate realization of continuous mappings by neural networks[J]. Neural networks, 1989, 2(3): 183-192.<br>[2]: Lin J N, Unbehauen R. On the realization of a Kolmogorov network[J]. Neural Computation, 1993, 5(1): 18-20.<br>[3]: Arnold H K. Dessert: Hilbert’s 13th Problem, in Full Colour[J].<br>[4]: Diaconis P, Shahshahani M. On nonlinear functions of linear combinations[J]. SIAM Journal on Scientific and Statistical Computing, 1984, 5(1): 175-191.<br>[5]: Liu Z, Wang Y, Vaidya S, et al. Kan: Kolmogorov-arnold networks[J]. arXiv preprint arXiv:2404.19756, 2024.<br>[6]: Hestness J, Narang S, Ardalani N, et al. Deep learning scaling is predictable, empirically[J]. arXiv preprint arXiv:1712.00409, 2017.<br>[7]: Goodarzi E, Ziaei M, Hosseinipour E Z. Introduction to optimization analysis in hydrosystem engineering[M]. New York, NY, USA: Springer International Publishing, 2014.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Written by:  </strong>Patrick
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://inlmouse.github.io/KAN/" title="Kolmogorov-Arnold Networks">http://inlmouse.github.io/KAN/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/ReplicaSKModel/" rel="prev" title="SK Model in Statistical Physics with Replica Method">
+                  <i class="fa fa-chevron-left"></i> SK Model in Statistical Physics with Replica Method
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Patrick Sylvestre</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","mhchem":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"inlmouse/inlmouse.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>
