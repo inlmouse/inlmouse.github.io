@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"inlmouse.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="The Solution of 2024 Alibaba Global Mathematics Competition Finals(Applied and Computational Mathematics) Q2&amp; Q6.(in Chinese)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2024阿里巴巴全球数学竞赛决赛(应用与计算数学)神经网络部分赏析">
+<meta property="og:url" content="http://inlmouse.github.io/Ali2024GMC/index.html">
+<meta property="og:site_name" content="Strategic Research Office of Individual Eleven">
+<meta property="og:description" content="The Solution of 2024 Alibaba Global Mathematics Competition Finals(Applied and Computational Mathematics) Q2&amp; Q6.(in Chinese)">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-07-09T09:52:48.000Z">
+<meta property="article:modified_time" content="2024-07-09T13:37:18.665Z">
+<meta property="article:author" content="Patrick Sylvestre">
+<meta property="article:tag" content="Math">
+<meta property="article:tag" content="Statistic">
+<meta property="article:tag" content="Neural Scaling Law">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://inlmouse.github.io/Ali2024GMC/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://inlmouse.github.io/Ali2024GMC/","path":"Ali2024GMC/","title":"2024阿里巴巴全球数学竞赛决赛(应用与计算数学)神经网络部分赏析"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>2024阿里巴巴全球数学竞赛决赛(应用与计算数学)神经网络部分赏析 | Strategic Research Office of Individual Eleven</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style type="text/css">
+.spoiler {
+  display: inline-flex;
+}
+p.spoiler {
+  display: flex;
+}
+.spoiler a {
+  pointer-events: none;
+}
+.spoiler-blur, .spoiler-blur > * {
+  transition: text-shadow .5s ease;
+}
+.spoiler .spoiler-blur, .spoiler .spoiler-blur > * {
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  text-shadow: 0 0 10px grey;
+  cursor: pointer;
+}
+.spoiler .spoiler-blur:hover, .spoiler .spoiler-blur:hover > * {
+  text-shadow: 0 0 5px grey;
+}
+.spoiler-box, .spoiler-box > * {
+  transition: color .5s ease,
+  background-color .5s ease;
+}
+.spoiler .spoiler-box, .spoiler .spoiler-box > * {
+  color: black;
+  background-color: black;
+  text-shadow: none;
+}</style><link rel="alternate" href="/atom.xml" title="Strategic Research Office of Individual Eleven" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Strategic Research Office of Individual Eleven</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Frontier Explorer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Articles</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About Me</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE2"><span class="nav-number">1.</span> <span class="nav-text">题目2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE2%E7%9A%84%E8%AF%81%E6%98%8E"><span class="nav-number">2.</span> <span class="nav-text">题目2的证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE6"><span class="nav-number">3.</span> <span class="nav-text">题目6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE6%E7%9A%84%E8%AF%81%E6%98%8E"><span class="nav-number">4.</span> <span class="nav-text">题目6的证明</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Patrick Sylvestre"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Patrick Sylvestre</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">articles</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/inlmouse" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;inlmouse" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:accelouch@gmail.com" title="E-Mail → mailto:accelouch@gmail.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://inlmouse.github.io/Ali2024GMC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Patrick Sylvestre">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Strategic Research Office of Individual Eleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="2024阿里巴巴全球数学竞赛决赛(应用与计算数学)神经网络部分赏析 | Strategic Research Office of Individual Eleven">
+      <meta itemprop="description" content="The Solution of 2024 Alibaba Global Mathematics Competition Finals(Applied and Computational Mathematics) Q2& Q6.(in Chinese)">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2024阿里巴巴全球数学竞赛决赛(应用与计算数学)神经网络部分赏析
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-07-09 17:52:48 / Modified: 21:37:18" itemprop="dateCreated datePublished" datetime="2024-07-09T17:52:48+08:00">2024-07-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Mathematical-Competition/" itemprop="url" rel="index"><span itemprop="name">Mathematical Competition</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">The Solution of 2024 Alibaba Global Mathematics Competition Finals(Applied and Computational Mathematics) Q2& Q6.(in Chinese)</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <div style="display:none">
+\(
+  \newcommand{\trsp}{\mathrm{T}}
+  \newcommand{\spr}{\mathbb{R}}
+  \newcommand{\Tr}{\mathrm{Tr}}
+  \newcommand{\expe}[2]{\mathbb{E}_{ #1}\begin{bmatrix}#2\end{bmatrix}}
+  \newcommand{\Var}{\mathrm{Var}}
+  \newcommand\defeq{\equiv}
+  \newcommand{\prob}[1]{\mathbb{P}\begin{bmatrix}#1\end{bmatrix}}
+  \newcommand\rvw{\boldsymbol{w}}
+  \newcommand\rvx{\boldsymbol{x}}
+\)
+</div>
+
+
+<h2 id="题目2"><a href="#题目2" class="headerlink" title="题目2"></a>题目2</h2><p>假设$F(x;w)$是一个输出标量的深度神经网络，其中$x$是输入，$w$表示权重。假设$F$关于$w$连续可微，并且对于调练数据$\{x_j,y_j\}_{j=1}^m$过参数化：即存在$w^*$使得对所有$j$满足$F(x_j;w^*)=y_j$。为了研究训练神经网络在$w^*$的局部优化动力学，我们考虑线性化神经网络$\widetilde{F}(x;w)=F(x;w^*)+(w-w^*)^\trsp\nabla F(x;w^*)$，其损失函数为：<br>\begin{equation}<br>    \text{Loss}(w) = \frac{1}{2m}\sum_{j=1}^m (y_j-\widetilde{F}(x_j;w))^2.<br>\end{equation}<br>令$\eta$表示学习率，梯度下降法为$w_{i+1} = w_i - \eta\nabla\text{Loss}(w_i)$，而随机梯度下降法为$w_{i+1} = w_i - \eta(\nabla\text{Loss}(w_i) + \epsilon_i)$，其中噪声项$\epsilon_i$满足$\expe{}{\epsilon_i}=0$和$\expe{}{\epsilon_i\epsilon_i^\trsp}=M(w_i)/b$，$b$是mini-batch的大小。假设协方差矩阵$M$与<br>\begin{equation}<br>    \Sigma = \frac1m \sum_{j=1}^m\nabla F(x;w^*)\nabla F(x;w^*)^\trsp,<br>\end{equation}</p>
+<p>在以下意义上对齐：<br>\begin{equation}<br>    \frac{\Tr(M(w)\Sigma)}{2\text{Loss}(w)|\Sigma|_F^2}\geq \delta,<br>\end{equation}</p>
+<p>对于$\delta &gt;0$和所有$w$成立。这里$|\cdot|_F$表示Frobenius范数。</p>
+<ol>
+<li>对于梯度下降，证明如果$\Sigma$的谱范数满足：<br>\begin{equation}<br> |\Sigma|_2 \leq \frac{2}{\eta},<br>\end{equation}<br>则梯度下降是局部稳定的（即对所有$i$，$\text{Loss}(w_i)$有界）。（注意，这里蕴含了一个依赖维度的界：$|\Sigma|_F \leq \frac{2\sqrt{d}}{\eta}$，其中$d$是$w$的维度。）</li>
+<li>对于随机梯度下降，如果$\expe{}{\text{Loss}(w_i)}$对所有$i$都有界,则以下独立于维度的不等式必须成立：<br>\begin{equation}<br> |\Sigma|_F \leq \frac{\sqrt{b/\delta}}{\eta}.<br>\end{equation}</li>
+</ol>
+<h2 id="题目2的证明"><a href="#题目2的证明" class="headerlink" title="题目2的证明"></a>题目2的证明</h2><ol>
+<li>注意到损失函数可以改写为：<br>\begin{aligned}<br> \text{Loss}(w) &amp;= \frac{1}{2m}\sum_{j=1}^m (y_j-\widetilde{F}(x_j;w))^2\\<br> &amp; = \frac{1}{2m}\sum_{j=1}^m (y_j-F(x_j;w^*)-(w-w^*)^\trsp\nabla F(x_j;w^*))^2\\<br> &amp; = \frac{1}{2m}\sum_{j=1}^m ((w-w^*)^\trsp\nabla F(x_j;w^*))^2.<br>\end{aligned}</li>
+</ol>
+<p>显然：<br>\begin{equation}<br>    \nabla\text{Loss}(w) = \frac{1}{2m}\sum_{j=1}^m 2\nabla F(x_j;w^*)\nabla F(x_j;w^*)^\trsp(w-w^*) = \Sigma(w-w^*).<br>\end{equation}<br>考虑梯度下降法：<br>\begin{aligned}<br>    w_{i+1} - w^* &amp;= w_i - \eta\nabla\text{Loss}(w_i) -w^* =  w_i - \eta\Sigma(w_i-w^*) -w^*\\<br>    &amp; = (I-\eta\Sigma)(w_i-w^*),<br>\end{aligned}<br>其中$I$为单位阵。注意到$\Sigma$为Fisher信息矩阵，半正定，且由条件$|\Sigma|_2 \leq \frac{2}{\eta}$，得到：<br>\begin{equation}<br>    |I-\eta\Sigma|_2 \leq 1.<br>\end{equation}<br>于是递推得到：<br>\begin{equation}<br>    |w_{i+1} - w^*|_2 \leq |w_{i} - w^*|_2 \leq \cdots \leq |w_0 - w^*|_2.<br>\end{equation}<br>自然，$\forall i \in\mathbb{N}$，有：<br>\begin{aligned}<br>    \text{Loss}(w_i) &amp;= \frac{1}{2m}\sum_{j=1}^m ((w_i-w^*)^\trsp\nabla F(x_j;w^*))^2\\<br>    &amp; \leq \frac12 (w_i-w^*)^\trsp\Sigma(w_i-w^*) \leq \frac12 |(w_i-w^*)|_2^2|\Sigma|_F\\<br>    &amp; \leq \frac12 \frac{2\sqrt{d}}{\eta}|(w_0-w^*)|_2^2 = \frac{\sqrt{d}}{\eta}|(w_0-w^*)|_2^2.<br>\end{aligned}<br>其中$d$是$w$的维度，从而梯度下降法是局部稳定的。</p>
+<ol>
+<li>记$z_i = w_i - w^*$，考察随机梯度下降法的损失期望：<br>\begin{aligned}<br> \expe{}{\text{Loss}(w_{i+1})}  &amp;= \expe{}{\frac12 z_{i+1}^\trsp\Sigma z_{i+1}} = \expe{}{\frac12 (z_i -\eta\nabla\text{Loss}(w_i)-\eta \varepsilon_i )^\trsp\Sigma (z_i -\eta\nabla\text{Loss}(w_i)-\eta \varepsilon_i )}\\<br> &amp; = \expe{}{\frac12 z_i^\trsp\Sigma z_i - \eta z_i^\trsp\Sigma(\text{Loss}(w_i) +\varepsilon_i) + \frac12\eta^2(\text{Loss}(w_i) +\varepsilon_i)^\trsp\Sigma(\text{Loss}(w_i) +\varepsilon_i)}\\<br> &amp; = \expe{}{\frac12 z_i^\trsp\Sigma z_i - \eta z_i^\trsp\Sigma^2z_i - \underbrace{\eta z_i^\trsp\Sigma\varepsilon_i}_{\expe{}{\varepsilon_i}=0} + \frac12\eta^2(\Sigma z_i+\varepsilon_i)^\trsp\Sigma(\Sigma z_i+\varepsilon_i)}\\<br> &amp; = \expe{}{\frac12 z_i^\trsp\Sigma z_i - \eta z_i^\trsp\Sigma^2z_i} + \frac12\eta^2\expe{}{z_i^\trsp\Sigma^3z_i + \varepsilon_i^\trsp\Sigma\varepsilon_i + \underbrace{\varepsilon_i^\trsp\Sigma^2z_i}_{\expe{}{\varepsilon_i}=0}}\\<br> &amp;\overset{*}{=} \expe{}{\frac12 z_i^\trsp\Sigma z_i - \eta z_i^\trsp\Sigma^2z_i + \frac12\eta^2z_i^\trsp\Sigma^3z_i} + \frac12\eta^2\expe{}{\Tr(\Var[\varepsilon_i]\Sigma)}\\<br> &amp; \overset{\Var[\varepsilon_i] = M(w_i)/b}{=} \expe{}{\frac12 z_i^\trsp\Sigma z_i - \eta z_i^\trsp\Sigma^2z_i + \frac12\eta^2z_i^\trsp\Sigma^3z_i} + \frac{\eta^2}{2b}\expe{}{\Tr(M(w_i)\Sigma)}\\<br> &amp; \defeq \expe{}{s(z_i)\text{Loss}(w_{i})} + \frac{\eta^2}{2b}\expe{}{\Tr(M(w_i)\Sigma)}<br>\end{aligned}</li>
+</ol>
+<p>其中*式使用了恒等式$\expe{}{x^\trsp\Sigma x}=\Tr(\Sigma\Var[x])+\expe{}{x}^\trsp\Sigma\expe{}{x}$，$s(z) \defeq 1 -2\eta\frac{z^\trsp\Sigma^2z}{z^\trsp\Sigma z} + \eta^2\frac{z^\trsp\Sigma^3z}{z^\trsp\Sigma z}$。</p>
+<p>这里使用Rayleigh Quotient归一化技巧，令：<br>\begin{equation}<br>    x = \frac{\Sigma^{\frac12}z}{|\Sigma^{\frac12}z|_2},<br>\end{equation}<br>记$\Sigma$的特征值为$\lambda_j \geq 0$，显然：<br>\begin{aligned}<br>    s(z) &amp; = 1 -2\eta x^\trsp\Sigma x+\eta^2x^\trsp\Sigma^2 x \\<br>    &amp; = 1 + \sum_j(-2\eta\lambda_j + \eta^2\lambda_j^2) \\<br>    &amp; \geq \inf_{\lambda = \min_j\{\lambda_j\}\geq 0}(1-2\eta\lambda +\eta^2\lambda^2) \geq 0.<br>\end{aligned}<br>那么：<br>\begin{aligned}<br>    \expe{}{\text{Loss}(w_{i+1})} &amp; = \expe{}{s(z)\text{Loss}(w_{i})} +  \frac{\eta^2}{2b}\expe{}{\Tr(M(w_i)\Sigma)}\\<br>    &amp;\geq  \frac{\eta^2}{2b}\expe{}{\Tr(M(w_i)\Sigma)}\\<br>    &amp;\overset{\text{alignment property}}{\geq } \frac{\eta^2}{2b} 2\delta|\Sigma|_F^2\text{Loss}(w_{i}).<br>\end{aligned}<br>由于$\text{Loss}(w_{i})$有界，因此$\expe{}{\text{Loss}(w_{i+1})}/\expe{}{\text{Loss}(w_{i})} \leq 1$，所以自然：<br>\begin{aligned}<br>     \frac{\eta^2\delta}{b} |\Sigma|_F^2 &amp;\leq 1\\<br>     |\Sigma|_F &amp;\leq \frac{\sqrt{b/\delta}}{\eta}.<br>\end{aligned}</p>
+<h2 id="题目6"><a href="#题目6" class="headerlink" title="题目6"></a>题目6</h2><p>研究大模型的缩放定律对减少其训练开销至关重要。即，最终的测试损失是如何随着训练步数和模型大小的变化而变化的？本题中，我们研究训练线性模型时的缩放定律。</p>
+<ol>
+<li>在本小问中，我们考虑使用梯度下降学习一个一维线性模型的情况。  </li>
+</ol>
+<ul>
+<li>定义数据分布$\mathcal{D}$为一个$\spr^2$上的分布，每个数据是一个数对$(x,y)$，分别代表输入和输出，并服从分布$x\sim\mathcal{N}(0,1),y\sim\mathcal{N}(3x,1)$.</li>
+<li>用梯度下降算法学习线性模型$f_{w}(x)=w\cdot x$，其中$w,x\in\spr$。初始化$w_0=0$并进行多步迭代。每次选代时，从$\mathcal{D}$中采样$(x_t.y_t)$，然后更新$w_t$为$w_{t+1}\gets w_t - \eta\nabla\ell_t(w_t)$，其中$\ell_t = \frac12(f_w(x_t)-y_t)^2$是平方损失函数，$\eta&gt;0$是学习率。</li>
+</ul>
+<p>设学习率$\eta \in (0,\frac13]$，那么$T\geq 0$步迭代之后的测试损失期望<br>\begin{equation}<br>    \bar{\mathcal{L}}_{\eta,T} = \expe{w_T}{\expe{(x,y)\sim\mathcal{D}}{\frac12(f_{w_T}(x)-y)^2}}<br>\end{equation}<br>是多少？</p>
+<ol>
+<li>现在我们在第一小问的设定下，考虑学习率$\eta$被调到最优的情况。求函数$g(T)$，使得当$T\to +\infty$时，以下条件成立：<br>\begin{equation}<br> \left|\inf_{\eta\in (0,\frac13]} \bar{\mathcal{L}}_{\eta,T} -g(T) \right|=O\left(\frac{(\log T)^2}{T^2}\right).<br>\end{equation}</li>
+<li>一个常常被观测到的实验现象是大语言模型的预训练过程大致遵循Chinchilla缩放定律：<br>\begin{equation}<br> \bar{\mathcal{L}}_{N,T} \approx \frac{A}{N^\alpha}+\frac{B}{T^\beta} +C,<br>\end{equation}<br>其中$\bar{\mathcal{L}}_{N,T}$是在经过$T$步训练后具有$N$个参数的模型的测试损失的期望，$A,B,\alpha,\beta,C$是常数。现在，我们来举一个训练多维线性模型的例子，使其也遵循类似的缩放定律。</li>
+</ol>
+<ul>
+<li>固定$a&gt;0,b\geq 1$。每个数据$(x_{\bullet},y)$由一个输入和输出组成，其中输入$x_{\bullet}$是一个无限维向量(可看作一个序列)，输出$y$满足$y\in\spr$。定义数据分布$\mathcal{D}$如下，首先，从Zipf分布中采样$k$，$\prob{k=i}\propto i^{-(a+1)}(i\geq 1)$。令$j=\lceil k^b \rceil$. 然后，从$\mathcal{N}(0,1)$中采样得到$x_{\bullet}$的第$j$个坐标$x_j$，并令其余坐标为$0$。最后，$y\sim\mathcal{N}(3x_j,1)$。这样得到的$(x_{\bullet},y)$的分布即数据分布$\mathcal{D}$。</li>
+<li>我们研究一个仅关注前$N$个输入坐标的线性模型。定义函数$\phi_N(x_{\bullet})=(x_1,\cdots,x_N)$。我们研究的线性模型具有参数$\rvw\in\spr^N$，输出为$f_{\rvw}(x_{\bullet})=\langle \rvw,\phi_N(x_{\bullet}) \rangle$。</li>
+<li>我们使用梯度下降算法来学习该线性模型，初始化$\rvw_0 = \boldsymbol{0}$并进行多步达代每次迭代时。从$\mathcal{D}$中采样$(x_{t,\bullet},y_t)$，然后更新$\rvw_t$为$\rvw_{t+1}\gets \rvw_t - \eta\nabla\ell_t(\rvw_t)$，其中$\ell_t = \frac12(f_\rvw(x_{t,\bullet})-y_t)^2$。</li>
+</ul>
+<p>令$\bar{\mathcal{L}}_{\eta,N,T} = \expe{\rvw_T}{\expe{(\rvx,y)\sim\mathcal{D}}{\frac12(f_{\rvw_T}(\rvx)-y)^2}}$为以学习率$\eta \in (0,\frac13]$对具有$N$个参数的线性模型进行$T\geq 0$步训练后的测试损失的期望。</p>
+<p>请求出$\alpha,\beta,C$，使得$\exists \gamma &gt;0, \forall c&gt;0$，当$T = N^{c+o(1)}$且$N$足够大时，以下条件成立：<br>\begin{equation}<br>    \epsilon(N,T)=\frac{\inf_{\eta \in (0,\frac13]}\bar{\mathcal{L}}_{\eta,N,T} -C}{\frac{1}{N^\alpha}+\frac{1}{T^\beta}}, (\log N + \log T)^{-\gamma} \leq \epsilon(N,T) \leq (\log N + \log T)^{\gamma}.<br>\end{equation}<br>即$\inf_{\eta \in (0,\frac13]}\bar{\mathcal{L}}_{\eta,N,T} = \widetilde{\Theta}(N^{-\alpha}+T^{-\beta})+C$，$\widetilde{\Theta}$表示忽略任何关于$\log N$和$\log T$的多项式。</p>
+<h2 id="题目6的证明"><a href="#题目6的证明" class="headerlink" title="题目6的证明"></a>题目6的证明</h2><p>注意到，$y=3x+\varepsilon, \varepsilon\sim\mathcal{N}(0,1)$，那么显然：<br>\begin{aligned}<br>\bar{\mathcal{L}}_{\eta,T} &amp;= \expe{w_T}{\expe{(x,y)\sim\mathcal{D}}{\frac12(f_{w_T}(x)-y)^2}}\\<br>&amp; = \expe{w_T}{\expe{x\sim\mathcal{N}(0,1),\varepsilon\sim\mathcal{N}(0,1)}{\frac12(w_Tx-(3x+\varepsilon)))^2}}\\<br>&amp; = \expe{w_T}{\frac12(w_T-3)^2\expe{x\sim\mathcal{N}(0,1)}{x^2}+\frac12\expe{\varepsilon\sim\mathcal{N}(0,1)}{\varepsilon^2}}\\<br>&amp; = \frac12 \expe{w_T}{(w_T-3)^2}+\frac12.<br>\end{aligned}<br>问题划归为求$w_T$的一阶矩和二阶矩。考察梯度下降公式：<br>\begin{equation}<br>    w_{t+1} = w_t - \eta\nabla\ell_t(w_t) = w_t - \eta(w_tx_t^2-x_ty_t).<br>\end{equation}<br>考察一阶矩有：<br>\begin{aligned}<br>    \expe{}{w_{t+1}} &amp;= \expe{}{w_t} - \eta (\expe{}{w_t}\expe{}{x_t^2}-\expe{}{x_ty_t})\\<br>    &amp; = \expe{}{w_t} - \eta \expe{}{w_t} + 3\eta \\<br>    &amp; = (1-\eta)\expe{}{w_t} + 3\eta.<br>\end{aligned}<br>也即是$\expe{}{w_{t+1}} - 3  = (1-\eta)\expe{}{w_t} + 3\eta - 3 = (1-\eta)(\expe{}{w_t} - 3)$，递推得到$\expe{}{w_T} = (1-\eta)^T(\expe{}{w_0}-3)+3 = 3\left(1-(1-\eta)^T\right)$.</p>
+<p>同理考察二阶矩有：<br>\begin{aligned}<br>    \expe{}{w_{t+1}^2} &amp;= \expe{}{w_t^2} - 2\eta (\expe{}{w_t^2}\expe{}{x_t^2}-\expe{}{w_t}\expe{}{x_ty_t}) \\<br>        \,\,\, &amp;+ \eta^2\left(\expe{}{w_t^2}\expe{}{x_t^4} -2 \expe{}{w_t}\expe{}{x_t^3y_t} + \expe{}{x_t^2y_t^2}\right)\\<br>    &amp; = \expe{}{w_t^2} - 2\eta(\expe{}{w_t^2}-3\expe{}{w_t}) + \eta^2(3\expe{}{w_t^2} -18 \expe{}{w_t} + 28)\\<br>    &amp; = (1-2\eta+3\eta^2)\expe{}{w_t^2} - (18\eta^2-6\eta)\expe{}{w_t} + 28\eta^2<br>\end{aligned}<br>带入一阶矩递推公式，凑配得：<br>\begin{aligned}<br>    \expe{}{w_{t+1}^2} - 6\expe{}{w_{t+1}} &amp; = (1-2\eta+3\eta^2)\expe{}{w_t^2} - (18\eta^2-6\eta)\expe{}{w_t} + 28\eta^2 - 6(1-\eta)\expe{}{w_t} - 18\eta\\<br>    &amp; = (1-2\eta+3\eta^2)(\expe{}{w_t^2}-6\expe{}{w_t}) + 28\eta^2 - 18\eta.<br>\end{aligned}<br>记$s = \frac{28\eta -18}{2-3\eta}$，也即是：<br>\begin{aligned}<br>    \expe{w_t}{(w_t-3)^2} &amp;= \expe{}{w_{t}^2} - 6\expe{}{w_{t}} + 9 \\<br>    &amp; = (1-2\eta+3\eta^2)^{t}(\expe{}{w_0^2} - 6\expe{}{w_0} + s) - s(1-2\eta+3\eta^2) + 9\\<br>    &amp; = s\left((1-2\eta+3\eta^2)^{t} -1 + 2\eta -3\eta^2 \right) + 9.<br>\end{aligned}<br>带回原式得到：<br>\begin{aligned}<br>    \bar{\mathcal{L}}_{\eta,T} &amp;= \frac12 \expe{w_T}{(w_T-3)^2}+\frac12\\<br>    &amp; = \frac{s}{2}\left((1-2\eta+3\eta^2)^{T} -1+ 2\eta -3\eta^2\right) + 5\\<br>    &amp; = \frac{(14\eta -9)\left((1-2\eta+3\eta^2)^{T} -1+ 2\eta -3\eta^2\right)}{2-3\eta}+5.<br>\end{aligned}</p>
+<p>…第三问待续…</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Written by:  </strong>Patrick
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://inlmouse.github.io/Ali2024GMC/" title="2024阿里巴巴全球数学竞赛决赛(应用与计算数学)神经网络部分赏析">http://inlmouse.github.io/Ali2024GMC/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Math/" rel="tag"># Math</a>
+              <a href="/tags/Statistic/" rel="tag"># Statistic</a>
+              <a href="/tags/Neural-Scaling-Law/" rel="tag"># Neural Scaling Law</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/CNSearchEngine/" rel="prev" title="Search Engines, Information Cocoons, and Corpus Database Pollution">
+                  <i class="fa fa-chevron-left"></i> Search Engines, Information Cocoons, and Corpus Database Pollution
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Patrick Sylvestre</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","mhchem":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"inlmouse/inlmouse.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>
