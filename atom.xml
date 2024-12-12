@@ -6,7 +6,7 @@
   <link href="http://inlmouse.github.io/atom.xml" rel="self"/>
   
   <link href="http://inlmouse.github.io/"/>
-  <updated>2024-08-14T03:29:19.372Z</updated>
+  <updated>2024-12-12T05:47:22.787Z</updated>
   <id>http://inlmouse.github.io/</id>
   
   <author>
@@ -17,13 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>基于预训练方法的视觉-语言模型(VLMs)</title>
+    <link href="http://inlmouse.github.io/pretvlms/"/>
+    <id>http://inlmouse.github.io/pretvlms/</id>
+    <published>2024-12-12T05:37:10.000Z</published>
+    <updated>2024-12-12T05:47:22.787Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文从视觉-语言模型（Vision-Language Models, VLMs）的发展背景、基本原理与训练方法、训练/评估数据集、模型性能以及未来发展路径几个方面叙述探讨基于预训练的VLMs技术。</p><div class="pdf-container" data-target="./Pre_train_Based_Vision_Language_Models_for_Vision_Tasks.pdf" data-height="800px"></div>]]></content>
+    
+    
+    <summary type="html">This post discusses the pre-trained Vision-Language Models (VLMs) technology from the perspectives of VLMs development background, basic principles and training methods, training/evaluation datasets, model performance, and future development paths.(in Chinese)</summary>
+    
+    
+    
+    <category term="Machine Learning" scheme="http://inlmouse.github.io/categories/Machine-Learning/"/>
+    
+    
+    <category term="Multimodality" scheme="http://inlmouse.github.io/tags/Multimodality/"/>
+    
+    <category term="Vision-Language Models" scheme="http://inlmouse.github.io/tags/Vision-Language-Models/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Perseids Meteor Shower</title>
     <link href="http://inlmouse.github.io/PerseidsMeteorShower24/"/>
     <id>http://inlmouse.github.io/PerseidsMeteorShower24/</id>
     <published>2024-08-14T02:50:30.000Z</published>
-    <updated>2024-08-14T03:29:19.372Z</updated>
+    <updated>2024-08-15T05:36:38.225Z</updated>
     
-    <content type="html"><![CDATA[<img src="/PerseidsMeteorShower24/composed-postpro.jpg" class width="1680" height="747"> <center> Sky Map(Aligned Starts). Filming time: Aug. 12, 2024, 3:00 to 3:40(GMT+8). Shooting interval 30 seconds. Photographic equipment: Canon 5D4. Exposure time 5s; iso 3200; Aperture 4; Manual Focus. Synthesis Software: Google Sequator; Adobe Photoshop.</center><img src="/PerseidsMeteorShower24/Perseids-Meteor.png" class width="1130" height="735"> <center> Perseids Meteors(Enlarged Local Image). Filming time: Aug. 12, 2024, 4:11(GMT+8). Photographic equipment: Sony Alpha 7c. Exposure time 2s; iso 3200; Aperture 4; Manual Focus. Synthesis Software: Adobe Photoshop.</center><img src="/PerseidsMeteorShower24/startrails-postpro.jpg" class width="1680" height="747"> <center> Star Trails. Filming time: Aug. 12, 2024, 3:00 to 3:40(GMT+8). Shooting interval 30 seconds. Photographic equipment: Canon 5D4. Exposure time 6s; iso 3200; Aperture 4; Manual Focus. Synthesis Software: Google Sequator; Adobe Photoshop.</center><img src="/PerseidsMeteorShower24/Handheld-Shooting.jpg" class width="1512" height="2016"> <center> Shooting Scene. Filming time: Aug. 12, 2024, 1:25(GMT+8). Photographic equipment: Apple iPhone 15 Pro. Exposure time 10s.</center>]]></content>
+    <content type="html"><![CDATA[<img src="/PerseidsMeteorShower24/composed-postpro.jpg" class width="1680" height="747"> <center> Sky Map(Aligned Starts). Filming time: Aug. 12, 2024, 3:00 to 3:40(GMT+8). Shooting interval 30 seconds. Photographic equipment: Canon 5D4. Exposure time 5s; iso 3200; Aperture 4; Manual Focus. Synthesis Software: Google Sequator; Adobe Photoshop.</center><img src="/PerseidsMeteorShower24/Perseids-Meteor.png" class width="1130" height="735"> <center> Perseids Meteors(Enlarged Local Image). Filming time: Aug. 12, 2024, 4:11(GMT+8). Photographic equipment: Sony Alpha 7c. Exposure time 2s; iso 3200; Aperture 4; Manual Focus. Synthesis Software: Adobe Photoshop.</center><img src="/PerseidsMeteorShower24/startrails-postpro.jpg" class width="1680" height="747"> <center> Star Trails. Filming time: Aug. 12, 2024, 3:00 to 3:40(GMT+8). Shooting interval 30 seconds. Photographic equipment: Canon 5D4. Exposure time 6s; iso 3200; Aperture 4; Manual Focus. Synthesis Software: Google Sequator; Adobe Photoshop.</center><img src="/PerseidsMeteorShower24/Handheld-Shooting.jpg" class width="756" height="1008"> <center> Shooting Scene. Filming time: Aug. 12, 2024, 1:25(GMT+8). Photographic equipment: Apple iPhone 15 Pro. Exposure time 10s.</center>]]></content>
     
     
     <summary type="html">2024年英仙座流星雨摄影小记.(in English)</summary>
